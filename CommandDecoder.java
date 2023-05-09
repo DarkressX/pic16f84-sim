@@ -118,27 +118,28 @@ public class CommandDecoder
 
         if ((input | 0x0060) == 0x0060)
         {
-            //NOP();
+            //nop();
         }
 
         if (input == 0x0064)
         {
-            //Clear Watchdog Timer
+            //clrwdt();
         }
 
         if (input == 0x0009)
         {
-            //RETFIE
+            //retfie();
         }
 
         if (input == 0x0008)
         {
-            //RETURN
+            //return();
+            //This is the function name. Do not mistake this for a normal return!
         }
 
         if (input == 0x0063)
         {
-            //SLEEP
+            //sleep();
         }
     }
 }
