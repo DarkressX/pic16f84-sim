@@ -1,6 +1,9 @@
 # pic16f84-sim
 
-FSR = File select register
+FSR = File select register > is a pointer:
+
+Addressing INDF actually addresses the register whose
+address is contained in the FSR register
 
 SFR = Special function register
 
