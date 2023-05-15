@@ -1,44 +1,48 @@
+import java.util.Arrays;
+
 public class Registers
 {
     private static final int MEMORY_SIZE = 0xFF;  //Addressable Memory
-    private static int bankSelect = 0;
-    private static int[] bank0 = new int[MEMORY_SIZE];
-    //private static int[] bank1 = new int[MEMORY_SIZE];
+    //private static int bankSelect = 0;
+    private static final int[] memory = new int[MEMORY_SIZE];
+    private static final int[] bank0UniqueSpecialRegister = new int[] {0x01,0x05,0x06}; //and many more
+    private static final int[] bank1UniqueSpecialRegister = new int[] {0x81,0x85,0x86}; //and many more
 
     public static int getRegister(int address)
     {
-        if(Registers.bankSelect == 0)
-        {
-            return Registers.bank0[address];
-        }
-        return Registers.bank0[address + 0x80];
+        return 5;
+    }
+
+    public static void setRegister(int address, int data)
+    {
 
     }
 
-    public static void setRegister(int data, int address)
+    public static int getDataFromIndirectAddress(int address)
     {
-        if(bankSelect == 0)
+        if((Arrays.stream(bank0UniqueSpecialRegister).anyMatch(x -> x == address)) || (Arrays.stream(bank1UniqueSpecialRegister).anyMatch(x -> x == address)))
         {
-            bank0[address] = data;
+            return memory[address];
         }
-        bank0[address + 0x80] = data;
+        return memory[address % 128]; // else: Registers which are mapped
+    }
+
+    public static void setDataFromIndirectAddress(int address, int data)
+    {
+        if((Arrays.stream(bank0UniqueSpecialRegister).anyMatch(x -> x == address)) || (Arrays.stream(bank1UniqueSpecialRegister).anyMatch(x -> x == address)))
+        {
+            memory[address] = data;
+        }
+        memory[address % 128] = data; // else: Registers which are mapped
     }
 
     private static int checkRegisterBank()
     {
         //syncStatusRegister();
-        if((bank0[0x03] & 0x20) == 0x0)  //Check RP0 Bit of Bank0 Status Register
+        if((memory[0x03] & 0x20) == 0x0)  //Check RP0 Bit of Bank0 Status Register
         {
             return 0;
         }
         return 1;
-    }
-
-    private static void syncStatusRegister()
-    {
-        if(bankSelect == 0)
-        {
-
-        }
     }
 }
