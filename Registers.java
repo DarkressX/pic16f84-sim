@@ -5,8 +5,8 @@ public class Registers
     private static final int MEMORY_SIZE = 0xFF;  //Addressable Memory
     //private static int bankSelect = 0;
     private static final int[] memory = new int[MEMORY_SIZE];
-    private static final int[] bank0UniqueSpecialRegister = new int[] {0x01,0x05,0x06}; //and many more
-    private static final int[] bank1UniqueSpecialRegister = new int[] {0x81,0x85,0x86}; //and many more
+    private static final int[] bank0UniqueSpecialRegister = new int[] {0x01,0x05,0x06,0x08,0x09}; //and many more
+    private static final int[] bank1UniqueSpecialRegister = new int[] {0x81,0x85,0x86,0x88,0x89}; //and many more
 
     public static int getRegister(int address)
     {
