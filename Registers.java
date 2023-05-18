@@ -14,19 +14,14 @@ public class Registers
             int indirectAddress = getFSR();
             return getDataFromIndirectAddress(indirectAddress);
         }
-        if(getRegisterBank() == 0)
-        {
-            return memory[address];
-        } else if(getRegisterBank() == 1)
+        if(getRegisterBank() != 0)
         {
             if((Arrays.stream(bank1UniqueSpecialRegister).anyMatch(x -> x == address)))
             {
                 return memory[address + 128]; //Write to correct memory address
             }
-            return memory[address]; // else: Registers which are mapped
         }
-        System.out.println("This should never happen");
-        return 0xFF;
+        return memory[address];
     }
 
     public static void setRegister(int address, int data)
@@ -37,21 +32,15 @@ public class Registers
             setDataFromIndirectAddress(indirectAddress, data);
             return;
         }
-        if(getRegisterBank() == 0)
-        {
-            memory[address] = data;
-            return;
-        } else if(getRegisterBank() == 1)
+        if(getRegisterBank() != 0)
         {
             if((Arrays.stream(bank1UniqueSpecialRegister).anyMatch(x -> x == address)))
             {
                 memory[address + 128] = data; //Write to correct memory address
                 return;
             }
-            memory[address] = data; // else: Registers which are mapped
-            return;
         }
-        System.out.println("This should never happen");
+        memory[address] = data;
     }
 
     private static int getDataFromIndirectAddress(int address)
