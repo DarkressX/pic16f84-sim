@@ -10,7 +10,7 @@ public class Registers
 
     public static int getRegister(int address)
     {
-        if(address == 0x0 || address == 0x80) //0x80 probably not needed because of 7-Bit address
+        if(address == 0x0)
         {
             int indirectAddress = getFSR();
             return getDataFromIndirectAddress(indirectAddress);
@@ -27,7 +27,7 @@ public class Registers
 
     public static void setRegister(int address, int data)
     {
-        if(address == 0x0 || address == 0x80)
+        if(address == 0x0)
         {
             int indirectAddress = getFSR();
             setDataFromIndirectAddress(indirectAddress, data);
