@@ -78,11 +78,7 @@ public class Registers
 
     public static boolean getZeroBit()
     {
-        if((memory[0x03] & 0x04) == 0x04)
-        {
-            return true;
-        }
-        return false;
+        return (memory[0x03] & 0x04) == 0x04;
     }
 
     public static void setZeroBit()
@@ -97,11 +93,7 @@ public class Registers
 
     public static boolean getDigitCarryBit()
     {
-        if((memory[0x03] & 0x02) == 0x02)
-        {
-            return true;
-        }
-        return false;
+        return (memory[0x03] & 0x02) == 0x02;
     }
 
     public static void setDigitCarryBit()
@@ -116,11 +108,7 @@ public class Registers
 
     public static boolean getCarryBit()
     {
-        if((memory[0x03] & 0x01) == 0x01)
-        {
-            return true;
-        }
-        return false;
+        return (memory[0x03] & 0x01) == 0x01;
     }
 
     public static void setCarryBit()
