@@ -1,4 +1,4 @@
-package Registers;
+package registers;
 
 import java.util.Arrays;
 

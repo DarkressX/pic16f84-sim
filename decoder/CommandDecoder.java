@@ -1,7 +1,7 @@
-import Commands.Addlw;
-import Commands.Command;
+package decoder;
 
-import java.util.ArrayList;
+import commands.Addlw;
+import commands.Command;
 
 public class CommandDecoder
 {
