@@ -1,6 +1,11 @@
+package decoder;
+
+import commands.Addlw;
+import commands.Command;
+
 public class CommandDecoder
 {
-    public CommandDecoder(int input)
+    public static Command decode(int input)
     {
         switch(input & 0x3F00)
         {
@@ -90,7 +95,8 @@ public class CommandDecoder
         {
             case 0x3E00:
                 //addlw();
-                break;
+                return new Addlw(input);
+                //break;
             case 0x3C00:
                 //sublw();
                 break;
@@ -141,5 +147,8 @@ public class CommandDecoder
         {
             //sleep();
         }
+
+        System.out.println("No command matched");
+        return null;
     }
 }

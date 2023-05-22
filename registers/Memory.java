@@ -1,9 +1,11 @@
+package registers;
+
 import java.util.Arrays;
 
-public class Registers
+public class Memory
 {
     private static final int MEMORY_SIZE = 0xFF;  //Addressable Memory
-    public static final int workingRegister = 0;
+    public static int workingRegister = 0;
     private static final int[] memory = new int[MEMORY_SIZE];
     private static final int[] bank0UniqueSpecialRegister = new int[] {0x01,0x05,0x06,0x08,0x09}; //and many more
     private static final int[] bank1UniqueSpecialRegister = new int[] {0x81,0x85,0x86,0x88,0x89}; //and many more
@@ -50,7 +52,7 @@ public class Registers
         {
             return memory[address];
         }
-        return memory[address % 128]; // else: Registers which are mapped
+        return memory[address % 128]; // else: Registers.Registers which are mapped
     }
 
     private static void setDataFromIndirectAddress(int address, int data)
@@ -59,7 +61,7 @@ public class Registers
         {
             memory[address] = data;
         }
-        memory[address % 128] = data; // else: Registers which are mapped
+        memory[address % 128] = data; // else: Registers.Registers which are mapped
     }
 
     private static int getRegisterBank()
