@@ -1,9 +1,6 @@
 package decoder;
 
-import commands.Addlw;
-import commands.Andlw;
-import commands.Command;
-import commands.Iorlw;
+import commands.*;
 
 public class CommandDecoder
 {
@@ -115,8 +112,7 @@ public class CommandDecoder
         switch(input & 0x3C00)
         {
             case 0x3000:
-                //movlw();
-                break;
+                return new Movlw(input);
             case 0x3400:
                 //retlw();
                 break;
