@@ -36,7 +36,7 @@ public class Sublw extends CommandUtils implements Command
     {
         int result = literal - Memory.workingRegister + 256;
 
-        checkZeroBit(result % 256);
+        checkZeroBit(result);
         checkCarryBit(result);
         checkDigitCarryBit(literal);
 

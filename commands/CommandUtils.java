@@ -6,7 +6,7 @@ public class CommandUtils
 {
     protected void checkZeroBit(int result)
     {
-        if(result == 0){
+        if((result % 256) == 0){
             Memory.setZeroBit();
         } else{
             Memory.clearZeroBit();
