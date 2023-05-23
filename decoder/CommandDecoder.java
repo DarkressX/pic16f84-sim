@@ -1,6 +1,7 @@
 package decoder;
 
 import commands.Addlw;
+import commands.Andlw;
 import commands.Command;
 
 public class CommandDecoder
@@ -52,8 +53,7 @@ public class CommandDecoder
                 //xorwf();
                 break;
             case 0x3900:
-                //andlw();
-                break;
+                return new Andlw(input);
             case 0x3800:
                 //iorlw();
                 break;
