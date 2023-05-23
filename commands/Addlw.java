@@ -18,7 +18,7 @@ public class Addlw extends CommandUtils implements Command
 
         checkZeroBit(result);
         checkCarryBit(result);
-        checkDigitCarryBit(result, literal);
+        checkDigitCarryBit(literal);
 
         Memory.workingRegister = result % 256;
     }
