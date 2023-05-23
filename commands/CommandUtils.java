@@ -22,7 +22,7 @@ public class CommandUtils
         }
     }
 
-    protected void checkDigitCarryBit(int result, int literal)
+    protected void checkDigitCarryBit(int literal)
     {
         if(((Memory.workingRegister & 0x0F) + (literal & 0x0F)) > 15){
             Memory.setDigitCarryBit();

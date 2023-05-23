@@ -95,8 +95,7 @@ public class CommandDecoder
                 return new Addlw(input);
                 //break;
             case 0x3C00:
-                //sublw();
-                break;
+                return new Sublw(input);
         }
 
         switch(input & 0x3800)
