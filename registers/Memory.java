@@ -12,6 +12,12 @@ public class Memory
 
     public static int getRegister(int address)
     {
+        if(address + 128 > 255) //Guard statement to check for early errors in command decoder or implementation
+        {
+            System.err.println("Guard statement triggered. The address must be 7Bit long and can therefore not exceed" +
+                    " 127");
+            System.exit(1);
+        }
         if(address == 0x0)
         {
             int indirectAddress = getFSR();
@@ -19,9 +25,9 @@ public class Memory
         }
         if(getRegisterBank() != 0)
         {
-            if((Arrays.stream(bank1UniqueSpecialRegister).anyMatch(x -> x == address)))
+            if((Arrays.stream(bank1UniqueSpecialRegister).anyMatch(x -> x == address))) //Check if register ist mapped
             {
-                return memory[address + 128]; //Write to correct memory address
+                return memory[address + 128]; //Ensure data is read from bank 1
             }
         }
         return memory[address];
@@ -29,30 +35,35 @@ public class Memory
 
     public static void setRegister(int address, int data)
     {
+        if(address + 128 > 255) //Guard statement to check for early errors in command decoder or implementation
+        {
+            System.err.println("Guard statement triggered. The address must be 7Bit long and can therefore not exceed" +
+                    " 127");
+            System.exit(1);
+        }
         if(address == 0x0)
         {
             int indirectAddress = getFSR();
             setDataFromIndirectAddress(indirectAddress, data);
             return;
         }
-        if(getRegisterBank() != 0)
+        if((Arrays.stream(bank0UniqueSpecialRegister).anyMatch(x -> x == address)) && getRegisterBank() == 0)
         {
-            if((Arrays.stream(bank1UniqueSpecialRegister).anyMatch(x -> x == address)))
-            {
-                memory[address + 128] = data; //Write to correct memory address
-                return;
-            }
+            memory[address] = data;
+            return;
+        }
+        if((Arrays.stream(bank1UniqueSpecialRegister).anyMatch(x -> x == address)) && getRegisterBank() == 1)
+        {
+            memory[address + 128] = data;
+            return;
         }
         memory[address] = data;
+        memory[address + 128] = data; //Ensure data is written to both banks to simulate mapping
     }
 
     private static int getDataFromIndirectAddress(int address)
     {
-        if((Arrays.stream(bank0UniqueSpecialRegister).anyMatch(x -> x == address)) || (Arrays.stream(bank1UniqueSpecialRegister).anyMatch(x -> x == address)))
-        {
-            return memory[address];
-        }
-        return memory[address % 128]; // else: Registers.Registers which are mapped
+        return memory[address];
     }
 
     private static void setDataFromIndirectAddress(int address, int data)
@@ -60,8 +71,10 @@ public class Memory
         if((Arrays.stream(bank0UniqueSpecialRegister).anyMatch(x -> x == address)) || (Arrays.stream(bank1UniqueSpecialRegister).anyMatch(x -> x == address)))
         {
             memory[address] = data;
+            return;
         }
         memory[address % 128] = data; // else: Registers.Registers which are mapped
+        memory[address % 128 + 128] = data; //Ensure data is written to both banks to simulate mapping
     }
 
     private static int getRegisterBank()
