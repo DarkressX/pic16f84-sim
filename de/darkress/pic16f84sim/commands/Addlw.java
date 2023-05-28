@@ -1,6 +1,6 @@
 package de.darkress.pic16f84sim.commands;
 
-import de.darkress.pic16f84sim.registers.Memory;
+import de.darkress.pic16f84sim.microcontroller.Memory;
 
 public class Addlw extends CommandUtils implements Command
 {
