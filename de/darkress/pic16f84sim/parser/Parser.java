@@ -1,4 +1,4 @@
-package parser;
+package de.darkress.pic16f84sim.parser;
 
 import java.io.File;
 import java.io.FileNotFoundException;
