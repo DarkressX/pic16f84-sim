@@ -1,6 +1,6 @@
-package decoder;
+package de.darkress.pic16f84sim.decoder;
 
-import commands.*;
+import de.darkress.pic16f84sim.commands.*;
 
 public class CommandDecoder
 {

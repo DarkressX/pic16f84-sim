@@ -1,6 +1,6 @@
-package commands;
+package de.darkress.pic16f84sim.commands;
 
-import registers.Memory;
+import de.darkress.pic16f84sim.registers.Memory;
 
 public class Iorlw extends CommandUtils implements Command
 {

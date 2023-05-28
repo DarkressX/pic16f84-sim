@@ -1,4 +1,4 @@
-package registers;
+package de.darkress.pic16f84sim.registers;
 
 import java.util.Arrays;
 
@@ -12,7 +12,7 @@ public class Memory
 
     public static int getRegister(int address)
     {
-        if(address + 128 > 255) //Guard statement to check for early errors in command decoder or implementation
+        if(address + 128 > 255) //Guard statement to check for early errors in command de.darkress.pic16f84sim.decoder or implementation
         {
             System.err.println("Guard statement triggered. The address must be 7Bit long and can therefore not exceed" +
                     " 127");
@@ -35,7 +35,7 @@ public class Memory
 
     public static void setRegister(int address, int data)
     {
-        if(address + 128 > 255) //Guard statement to check for early errors in command decoder or implementation
+        if(address + 128 > 255) //Guard statement to check for early errors in command de.darkress.pic16f84sim.decoder or implementation
         {
             System.err.println("Guard statement triggered. The address must be 7Bit long and can therefore not exceed" +
                     " 127");
