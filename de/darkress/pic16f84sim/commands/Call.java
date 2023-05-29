@@ -1,12 +1,13 @@
 package de.darkress.pic16f84sim.commands;
 
 import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
+import de.darkress.pic16f84sim.microcontroller.Stack;
 
-public class Goto extends CommandUtils implements Command
+public class Call extends CommandUtils implements Command
 {
     private final int literal;
 
-    public Goto(int input)
+    public Call(int input)
     {
         literal = input & 0x07FF;
     }
@@ -14,6 +15,7 @@ public class Goto extends CommandUtils implements Command
     @Override
     public void execute()
     {
+        Stack.push(ProgramCounter.getPc() + 1);
         ProgramCounter.setPcFrom11BitLiteral(literal);
     }
 }

@@ -100,8 +100,7 @@ public class CommandDecoder
         switch(input & 0x3800)
         {
             case 0x2000:
-                //call();
-                break;
+                return new Call(input);
             case 0x2800:
                 return new Goto(input);
         }

@@ -13,13 +13,12 @@ class Main
 
         ArrayList<Command> program = new ArrayList<>();
         Memory.workingRegister = 0xAA;
-        int input1 = 0x2FFF;
+        int input1 = 0x27FF;
         program.add(CommandDecoder.decode(input1));
 
         Memory.setPCLATH(0xFF);
         program.get(0).execute();
 
         //ProgramCounter.incPC();
-
     }
 }

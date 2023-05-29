@@ -11,7 +11,7 @@ public class ProgramCounter
         return pc;
     }
 
-    public static void setPcForGotoCall(int data)
+    public static void setPcFrom11BitLiteral(int data)
     {
         int pcl = data & 0x00FF;
         int pch = Memory.getPCLATH();
