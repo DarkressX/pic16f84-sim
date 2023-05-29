@@ -91,6 +91,28 @@ public class Memory
         return memory[0x4];
     }
 
+    public static int getPCL()
+    {
+        return memory[0x2];
+    }
+
+    public static void setPCL(int data)
+    {
+        memory[0x2] = data;
+        memory[0x82] = data;
+    }
+
+    public static int getPCLATH()
+    {
+        return memory[0xA] & 0x1F;
+    }
+
+    public static void setPCLATH(int data)
+    {
+        memory[0xA] = data & 0x1F;
+        memory[0x8A] = data & 0x1F;
+    }
+
     public static boolean getZeroBit()
     {
         return (memory[0x03] & 0x04) == 0x04;
@@ -99,6 +121,7 @@ public class Memory
     public static void setZeroBit()
     {
         memory[0x03] |= 0x04;
+        memory[0x83] |= 0x04;
     }
 
     public static void clearZeroBit()
@@ -114,6 +137,7 @@ public class Memory
     public static void setDigitCarryBit()
     {
         memory[0x03] |= 0x02;
+        memory[0x83] |= 0x02;
     }
 
     public static void clearDigitCarryBit()
@@ -129,6 +153,7 @@ public class Memory
     public static void setCarryBit()
     {
         memory[0x03] |= 0x01;
+        memory[0x83] |= 0x01;
     }
 
     public static void clearCarryBit()

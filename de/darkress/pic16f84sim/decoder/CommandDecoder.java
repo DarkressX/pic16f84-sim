@@ -103,8 +103,7 @@ public class CommandDecoder
                 //call();
                 break;
             case 0x2800:
-                //goto();
-                break;
+                return new Goto(input);
         }
 
         switch(input & 0x3C00)
