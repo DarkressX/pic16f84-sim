@@ -15,4 +15,9 @@ public class ProgramCounter
     {
         ProgramCounter.PC = PC;
     }
+
+    public static void incPC()
+    {
+        PC++;
+    }
 }

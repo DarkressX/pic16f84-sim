@@ -55,8 +55,7 @@ public class CommandDecoder
             case 0x3800:
                 return new Iorlw(input);
             case 0x3A00:
-                //xorlw();
-                break;
+                return new Xorlw(input);
         }
 
         switch(input & 0x3F80)
