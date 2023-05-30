@@ -14,9 +14,8 @@ public class Stack
 
     public static int pop()
     {
-        int tmp = stack[stackPointer];
         pointPrevious();
-        return tmp;
+        return stack[stackPointer];
     }
 
     public static int peek()

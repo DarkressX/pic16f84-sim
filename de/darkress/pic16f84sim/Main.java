@@ -12,13 +12,14 @@ class Main
     public static void main(String[] args) {
 
         ArrayList<Command> program = new ArrayList<>();
-        Memory.workingRegister = 0xAA;
         int input1 = 0x27FF;
-        program.add(CommandDecoder.decode(input1));
-
-        Memory.setPCLATH(0xFF);
-        program.get(0).execute();
-
-        //ProgramCounter.incPC();
+        program.add(CommandDecoder.decode(0x3011));
+        program.add(CommandDecoder.decode(0x2003));
+        program.add(CommandDecoder.decode(0x3022));
+        program.add(CommandDecoder.decode(0x0008));
+        while(true)
+        {
+            program.get(ProgramCounter.getPc()).execute();
+        }
     }
 }

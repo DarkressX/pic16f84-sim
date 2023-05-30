@@ -131,8 +131,7 @@ public class CommandDecoder
 
         if (input == 0x0008)
         {
-            //return();
-            //This is the function name. Do not mistake this for a normal return!
+            return new Return();
         }
 
         if (input == 0x0063)
