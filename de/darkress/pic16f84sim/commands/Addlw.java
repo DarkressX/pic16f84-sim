@@ -3,7 +3,7 @@ package de.darkress.pic16f84sim.commands;
 import de.darkress.pic16f84sim.microcontroller.Memory;
 import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
 
-public class Addlw extends CommandUtils implements Command
+public class Addlw extends LiteralCommandUtils implements Command
 {
     private final int literal;
 

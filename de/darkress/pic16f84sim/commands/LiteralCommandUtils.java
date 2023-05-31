@@ -2,7 +2,7 @@ package de.darkress.pic16f84sim.commands;
 
 import de.darkress.pic16f84sim.microcontroller.Memory;
 
-public class CommandUtils
+public class LiteralCommandUtils
 {
     protected void checkZeroBit(int result)
     {

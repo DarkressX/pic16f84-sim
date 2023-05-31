@@ -4,7 +4,7 @@ import de.darkress.pic16f84sim.microcontroller.Memory;
 import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
 import de.darkress.pic16f84sim.microcontroller.Stack;
 
-public class Retlw extends CommandUtils implements Command
+public class Retlw extends LiteralCommandUtils implements Command
 {
     private final int literal;
 

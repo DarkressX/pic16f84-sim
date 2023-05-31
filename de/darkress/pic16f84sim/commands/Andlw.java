@@ -2,7 +2,7 @@ package de.darkress.pic16f84sim.commands;
 
 import de.darkress.pic16f84sim.microcontroller.Memory;
 
-public class Andlw extends CommandUtils implements Command
+public class Andlw extends LiteralCommandUtils implements Command
 {
     private final int literal;
 

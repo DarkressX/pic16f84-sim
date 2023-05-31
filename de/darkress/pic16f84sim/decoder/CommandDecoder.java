@@ -9,8 +9,7 @@ public class CommandDecoder
         switch(input & 0x3F00)
         {
             case 0x700:
-                //addwf();
-                break;
+                return new Addwf(input);
             case 0x500:
                 //andwf();
                 break;

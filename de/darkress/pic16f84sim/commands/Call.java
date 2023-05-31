@@ -3,7 +3,7 @@ package de.darkress.pic16f84sim.commands;
 import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
 import de.darkress.pic16f84sim.microcontroller.Stack;
 
-public class Call extends CommandUtils implements Command
+public class Call extends LiteralCommandUtils implements Command
 {
     private final int literal;
 
