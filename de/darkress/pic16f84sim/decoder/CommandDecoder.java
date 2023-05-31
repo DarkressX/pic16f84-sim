@@ -11,8 +11,7 @@ public class CommandDecoder
             case 0x700:
                 return new Addwf(input);
             case 0x500:
-                //andwf();
-                break;
+                return new Andwf(input);
             case 0x900:
                 //comf();
                 break;
