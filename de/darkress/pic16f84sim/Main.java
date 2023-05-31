@@ -14,8 +14,8 @@ class Main
         ArrayList<Command> program = new ArrayList<>();
         int input1 = 0x27FF;
         program.add(CommandDecoder.decode(0x3011)); //Write 0x11 to W
-        Memory.setRegister(0x14, 0x14);
-        program.add(CommandDecoder.decode(0x0994));
+        Memory.setRegister(0x14, 0x01);
+        program.add(CommandDecoder.decode(0x0314));
         for(int i = 0; i < 2; i++)
         {
             program.get(ProgramCounter.getPc()).execute();
