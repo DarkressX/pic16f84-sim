@@ -59,6 +59,10 @@ public class Memory
         }
         memory[address] = data;
         memory[address + 128] = data; //Ensure data is written to both banks to simulate mapping
+        if(address == 0x2) //Check if PCL is destination
+        {
+            ProgramCounter.loadPc();
+        }
     }
 
     private static int getDataFromIndirectAddress(int address)
@@ -75,6 +79,10 @@ public class Memory
         }
         memory[address % 128] = data; // else: Registers.Registers which are mapped
         memory[address % 128 + 128] = data; //Ensure data is written to both banks to simulate mapping
+        if(address == 0x2) //Check if PCL is destination
+        {
+            ProgramCounter.loadPc();
+        }
     }
 
     private static int getRegisterBank()

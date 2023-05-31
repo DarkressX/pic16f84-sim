@@ -20,19 +20,20 @@ public class ProgramCounter
         pc = (pch) + pcl;
     }
 
+    public static void setPcFromStack(int stack)
+    {
+        pc = stack;
+        Memory.setPCL(pc & 0x00FF);
+    }
+
+    public static void loadPc()
+    {
+        pc = (Memory.getPCLATH() <<8) + Memory.getPCL();
+    }
+
     public static void incPC() //is called after every instruction execution
     {
-        int pcl = Memory.getPCL();
-        int pclath = Memory.getPCLATH();
-        if(pcl == 0xFF)
-        {
-            pclath++;
-            pcl = 0;
-        } else {
-            pcl++;
-        }
-        Memory.setPCL(pcl);
-        Memory.setPCLATH(pclath);
-        pc = (pclath <<8) + pcl;
+        pc++;
+        Memory.setPCL(pc & 0x00FF);
     }
 }

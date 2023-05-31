@@ -17,8 +17,6 @@ public class Retlw extends CommandUtils implements Command
     public void execute()
     {
         Memory.workingRegister = literal;
-        ProgramCounter.setPcFrom11BitLiteral(Stack.pop());
-        //TODO: This may need some rework since it does not really load all 13 Bit into the PC. Only 8 Bit are
-        // effectively set
+        ProgramCounter.setPcFromStack(Stack.pop());
     }
 }
