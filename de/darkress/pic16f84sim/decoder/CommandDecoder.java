@@ -110,8 +110,7 @@ public class CommandDecoder
             case 0x3000:
                 return new Movlw(input);
             case 0x3400:
-                //retlw();
-                break;
+                return new Retlw(input);
         }
 
         if ((input | 0x0060) == 0x0060)
