@@ -111,7 +111,7 @@ public class CommandDecoder
 
         if ((input | 0x0060) == 0x0060)
         {
-            //nop();
+            return new Nop();
         }
 
         if (input == 0x0064)
