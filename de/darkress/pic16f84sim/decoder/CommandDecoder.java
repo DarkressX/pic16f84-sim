@@ -19,8 +19,7 @@ public class CommandDecoder
             case 0xB00:
                 return new Decfsz(input);
             case 0xA00:
-                //incf();
-                break;
+                return new Incf(input);
             case 0xF00:
                 //incfsz();
                 break;
