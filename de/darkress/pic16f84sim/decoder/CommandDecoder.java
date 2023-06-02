@@ -57,8 +57,7 @@ public class CommandDecoder
                 //clrf();
                 break;
             case 0x100:
-                //clrw();
-                break;
+                return new Clrw();
             case 0x80:
                 //movwf();
                 break;
