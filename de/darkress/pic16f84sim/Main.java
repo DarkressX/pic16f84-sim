@@ -12,8 +12,8 @@ class Main
     public static void main(String[] args) {
 
         ArrayList<Command> program = new ArrayList<>();
-        Memory.workingRegister = 0x10;
-        program.add(CommandDecoder.decode(0x123)); //Write 0x11 to W
+        Memory.setRegister(0x14, 0xFF);
+        program.add(CommandDecoder.decode(0x0194));
         for(int i = 0; i < program.size(); i++)
         {
             program.get(ProgramCounter.getPc()).execute();

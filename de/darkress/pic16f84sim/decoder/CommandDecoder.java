@@ -54,8 +54,7 @@ public class CommandDecoder
         switch(input & 0x3F80)
         {
             case 0x180:
-                //clrf();
-                break;
+                return new Clrf(input);
             case 0x100:
                 return new Clrw();
             case 0x80:
