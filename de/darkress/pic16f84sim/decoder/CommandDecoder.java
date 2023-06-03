@@ -23,8 +23,7 @@ public class CommandDecoder
             case 0xF00:
                 return new Incfsz(input);
             case 0x400:
-                //iorwf();
-                break;
+                return new Iorwf(input);
             case 0x800:
                 //movf();
                 break;
