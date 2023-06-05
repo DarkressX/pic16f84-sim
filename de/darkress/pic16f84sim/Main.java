@@ -14,7 +14,7 @@ class Main
         ArrayList<Command> program = new ArrayList<>();
         Memory.workingRegister = 0x1A;
         Memory.setRegister(0x14, 0x1B);
-        program.add(CommandDecoder.decode(0x0894));
+        program.add(CommandDecoder.decode(0x0094));
         for(int i = 0; i < program.size(); i++)
         {
             program.get(ProgramCounter.getPc()).execute();

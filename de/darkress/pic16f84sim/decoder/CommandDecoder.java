@@ -56,8 +56,7 @@ public class CommandDecoder
             case 0x100:
                 return new Clrw();
             case 0x80:
-                //movwf();
-                break;
+                return new Movwf(input);
         }
 
         switch(input & 0x3C00)
