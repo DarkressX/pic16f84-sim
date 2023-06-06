@@ -12,9 +12,9 @@ class Main
     public static void main(String[] args) {
 
         ArrayList<Command> program = new ArrayList<>();
-        Memory.clearCarryBit();
-        Memory.setRegister(0x14, 0B00000001); //240 << 224
-        program.add(CommandDecoder.decode(0x0C94));
+        Memory.workingRegister = 0x01;
+        Memory.setRegister(0x14, 0x01); //240 << 224
+        program.add(CommandDecoder.decode(0x0294));
         for(int i = 0; i < program.size(); i++)
         {
             program.get(ProgramCounter.getPc()).execute();

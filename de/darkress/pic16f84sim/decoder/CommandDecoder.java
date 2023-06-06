@@ -31,8 +31,7 @@ public class CommandDecoder
             case 0xC00:
                 return new Rrf(input);
             case 0x200:
-                //subwf();
-                break;
+                return new Subwf(input);
             case 0xE00:
                 //swapf();
                 break;
