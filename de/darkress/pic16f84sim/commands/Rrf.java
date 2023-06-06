@@ -3,12 +3,12 @@ package de.darkress.pic16f84sim.commands;
 import de.darkress.pic16f84sim.microcontroller.Memory;
 import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
 
-public class Rlf extends FileRegisterCommandUtils implements Command
+public class Rrf extends FileRegisterCommandUtils implements Command
 {
     private final int address;
     private final boolean destinationBit;
 
-    public Rlf(int input)
+    public Rrf(int input)
     {
         address = input & 0x007F;
         destinationBit = checkDestinationBit(input);
@@ -18,9 +18,9 @@ public class Rlf extends FileRegisterCommandUtils implements Command
     public void execute()
     {
         int register = Memory.getRegister(address);
-        int newCarry = register >>7;
+        int newCarry = register & 0x01;
         int oldCarry = Memory.getCarryBit();
-        register = ((register <<1) + oldCarry) & 0xFF;
+        register = (oldCarry << 7) + (register >>1);
 
         if(newCarry == 1)
         {
