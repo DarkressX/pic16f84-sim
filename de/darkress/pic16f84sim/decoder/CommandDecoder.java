@@ -27,8 +27,7 @@ public class CommandDecoder
             case 0x800:
                 return new Movf(input);
             case 0xD00:
-                //rlf();
-                break;
+                return new Rlf(input);
             case 0xC00:
                 //rrf();
                 break;

@@ -153,9 +153,13 @@ public class Memory
         memory[0x03] &= 0xFD;
     }
 
-    public static boolean getCarryBit()
+    public static int getCarryBit()
     {
-        return (memory[0x03] & 0x01) == 0x01;
+        if((memory[0x03] & 0x01) == 0x01)
+        {
+            return 1;
+        }
+        else return 0;
     }
 
     public static void setCarryBit()
