@@ -26,7 +26,7 @@ public class Decfsz extends FileRegisterCommandUtils implements Command
         if((result % 256) == 0)
         {
             Nop nop = new Nop();
-            nop.execute();
+            nop.execute(); // TODO: What happens if an interrupt gets triggered during the nop execution?
         }
         ProgramCounter.incPC();
     }
