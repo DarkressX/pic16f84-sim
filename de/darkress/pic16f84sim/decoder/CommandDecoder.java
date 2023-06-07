@@ -63,16 +63,13 @@ public class CommandDecoder
             case 0x1800:
                 return new Btfsc(input);
             case 0x1C00:
-                //btfss();
-                break;
+               return new Btfss(input);
         }
 
         switch(input & 0x3E00)
         {
             case 0x3E00:
-                //addlw();
                 return new Addlw(input);
-                //break;
             case 0x3C00:
                 return new Sublw(input);
         }

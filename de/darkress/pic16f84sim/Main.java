@@ -13,8 +13,8 @@ class Main
 
         ArrayList<Command> program = new ArrayList<>();
         Memory.workingRegister = 0x01;
-        Memory.setRegister(0x14, 0xA5); //240 << 224
-        program.add(CommandDecoder.decode(0x1894));
+        Memory.setRegister(0x14, 0xA7); //240 << 224
+        program.add(CommandDecoder.decode(0x1C94));
         for(int i = 0; i < program.size(); i++)
         {
             program.get(ProgramCounter.getPc()).execute();
