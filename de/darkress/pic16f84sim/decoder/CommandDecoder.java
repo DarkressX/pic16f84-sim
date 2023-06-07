@@ -59,8 +59,7 @@ public class CommandDecoder
             case 0x1000:
                 return new Bcf(input);
             case 0x1400:
-                //bsf();
-                break;
+                return new Bsf(input);
             case 0x1800:
                 //btfsc();
                 break;
