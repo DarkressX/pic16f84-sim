@@ -35,8 +35,7 @@ public class CommandDecoder
             case 0xE00:
                 return new Swapf(input);
             case 0x600:
-                //xorwf();
-                break;
+                return new Xorwf(input);
             case 0x3900:
                 return new Andlw(input);
             case 0x3800:
