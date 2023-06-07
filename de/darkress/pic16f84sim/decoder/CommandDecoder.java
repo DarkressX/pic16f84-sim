@@ -57,8 +57,7 @@ public class CommandDecoder
         switch(input & 0x3C00)
         {
             case 0x1000:
-                //bcf();
-                break;
+                return new Bcf(input);
             case 0x1400:
                 //bsf();
                 break;
