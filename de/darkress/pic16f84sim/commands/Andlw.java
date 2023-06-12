@@ -1,6 +1,7 @@
 package de.darkress.pic16f84sim.commands;
 
 import de.darkress.pic16f84sim.microcontroller.Memory;
+import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
 
 public class Andlw extends LiteralCommandUtils implements Command
 {
@@ -18,5 +19,6 @@ public class Andlw extends LiteralCommandUtils implements Command
         checkZeroBit(result);
 
         Memory.workingRegister = result % 256;
+        ProgramCounter.incPC();
     }
 }

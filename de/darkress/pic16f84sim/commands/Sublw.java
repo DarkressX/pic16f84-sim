@@ -1,6 +1,7 @@
 package de.darkress.pic16f84sim.commands;
 
 import de.darkress.pic16f84sim.microcontroller.Memory;
+import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
 
 public class Sublw extends LiteralCommandUtils implements Command
 {
@@ -41,5 +42,6 @@ public class Sublw extends LiteralCommandUtils implements Command
         checkDigitCarryBit(literal);
 
         Memory.workingRegister = result % 256;
+        ProgramCounter.incPC();
     }
 }
