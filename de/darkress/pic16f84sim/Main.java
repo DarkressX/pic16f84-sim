@@ -2,22 +2,28 @@ package de.darkress.pic16f84sim;
 
 import de.darkress.pic16f84sim.commands.Command;
 import de.darkress.pic16f84sim.decoder.CommandDecoder;
+import de.darkress.pic16f84sim.microcontroller.Cycles;
 import de.darkress.pic16f84sim.microcontroller.Memory;
 import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
+import de.darkress.pic16f84sim.parser.Parser;
 
-import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 class Main
 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
-        ArrayList<Command> program = new ArrayList<>();
-        Memory.workingRegister = 0x01;
-        Memory.setRegister(0x14, 0xA7); //240 << 224
-        program.add(CommandDecoder.decode(0x1C94));
-        for(int i = 0; i < program.size(); i++)
+        Command[] program = Parser.parser("de/darkress/pic16f84sim/TPicSim101.LST");
+        /*for(int i = 0; i < instructions.size(); i++)
         {
-            program.get(ProgramCounter.getPc()).execute();
+            program.add(CommandDecoder.decode(instructions.get(i)));
+        }*/
+
+        while(ProgramCounter.getPc() < 1024)
+        {
+            program[ProgramCounter.getPc()].execute();
+            System.out.println(Memory.workingRegister + " " + Cycles.getCycles());
+            System.out.println(Memory.getPCLATH() + " " + Memory.getPCL() + "\n");
         }
     }
 }
