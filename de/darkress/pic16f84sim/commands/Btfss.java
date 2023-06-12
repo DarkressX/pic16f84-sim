@@ -1,5 +1,6 @@
 package de.darkress.pic16f84sim.commands;
 
+import de.darkress.pic16f84sim.microcontroller.Cycles;
 import de.darkress.pic16f84sim.microcontroller.Memory;
 import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
 
@@ -22,8 +23,10 @@ public class Btfss extends BitOrientedCommandUtils implements Command
         if((result & (1 << bitPlacement)) > 0) //Test if bit is set
         {
             ProgramCounter.incPC();
+            Cycles.addToCycles(1);
         }
 
         ProgramCounter.incPC();
+        Cycles.addToCycles(1);
     }
 }

@@ -1,5 +1,6 @@
 package de.darkress.pic16f84sim.commands;
 
+import de.darkress.pic16f84sim.microcontroller.Cycles;
 import de.darkress.pic16f84sim.microcontroller.Memory;
 import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
 
@@ -31,5 +32,6 @@ public class Rrf extends FileRegisterCommandUtils implements Command
 
         writeToDestination(destinationBit, address, register);
         ProgramCounter.incPC();
+        Cycles.addToCycles(1);
     }
 }

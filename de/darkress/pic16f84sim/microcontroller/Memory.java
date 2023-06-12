@@ -62,6 +62,7 @@ public class Memory
         if(address == 0x2) //Check if PCL is destination
         {
             ProgramCounter.loadPc();
+            Cycles.addToCycles(1);
         }
     }
 

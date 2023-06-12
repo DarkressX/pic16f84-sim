@@ -1,5 +1,6 @@
 package de.darkress.pic16f84sim.commands;
 
+import de.darkress.pic16f84sim.microcontroller.Cycles;
 import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
 
 public class Goto extends LiteralCommandUtils implements Command
@@ -15,5 +16,6 @@ public class Goto extends LiteralCommandUtils implements Command
     public void execute()
     {
         ProgramCounter.setPcFrom11BitLiteral(literal);
+        Cycles.addToCycles(2);
     }
 }

@@ -1,5 +1,6 @@
 package de.darkress.pic16f84sim.commands;
 
+import de.darkress.pic16f84sim.microcontroller.Cycles;
 import de.darkress.pic16f84sim.microcontroller.Memory;
 import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
 
@@ -17,5 +18,6 @@ public class Movlw extends LiteralCommandUtils implements Command
     {
         Memory.workingRegister = literal;
         ProgramCounter.incPC();
+        Cycles.addToCycles(1);
     }
 }

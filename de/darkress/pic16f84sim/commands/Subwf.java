@@ -1,5 +1,6 @@
 package de.darkress.pic16f84sim.commands;
 
+import de.darkress.pic16f84sim.microcontroller.Cycles;
 import de.darkress.pic16f84sim.microcontroller.Memory;
 import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
 
@@ -45,5 +46,6 @@ public class Subwf extends FileRegisterCommandUtils implements Command
 
         writeToDestination(destinationBit, address, result % 256);
         ProgramCounter.incPC();
+        Cycles.addToCycles(1);
     }
 }
