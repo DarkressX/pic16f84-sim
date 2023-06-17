@@ -54,7 +54,8 @@ public class Memory
             setDataFromIndirectAddress(indirectAddress, data);
             return;
         }
-        if(address == 0x01) //Reset PrescalerCounter if change on Option or Timer Register
+        if(address == 0x01 && !Timer.getPrescalerAssignment()) //Reset PrescalerCounter if change on Option or Timer
+            // Register
         {
             Timer.resetTimeToTimerIncrease();
             Timer.setCyclesToTimerIncrease(Timer.getCyclesToTimerIncrease() - 1); //Decrease by one to account for
@@ -86,7 +87,7 @@ public class Memory
 
     private static void setDataFromIndirectAddress(int address, int data)
     {
-        if(address == 0x81 || address == 0x01) //Reset PrescalerCounter if change on Option or Timer Register
+        if((address == 0x81 || address == 0x01) && !Timer.getPrescalerAssignment()) //Reset PrescalerCounter if change on Option or Timer Register
         {
             Timer.resetTimeToTimerIncrease();
             Timer.setCyclesToTimerIncrease(Timer.getCyclesToTimerIncrease() - 1); //Decrease by one to account for

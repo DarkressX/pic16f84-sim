@@ -36,4 +36,9 @@ public class ProgramCounter
         pc++;
         Memory.setPCL(pc & 0x00FF);
     }
+
+    public static void resetProgramCounter() {
+        pc = 0;
+        Memory.setPCL(0x0);
+    }
 }

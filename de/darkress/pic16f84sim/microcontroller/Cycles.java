@@ -5,7 +5,7 @@ public class Cycles {
 
     public static void incCycles()
     {
-        Timer.increaseTimer();
+        Timer.decreasePrescaler();
         cycles++;
     }
 

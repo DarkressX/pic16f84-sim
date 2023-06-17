@@ -24,7 +24,7 @@ public class Timer
         cyclesToTimerIncrease = getPrescalerFactor();
     }
 
-    private static boolean getPrescalerAsssignment() {
+    public static boolean getPrescalerAssignment() {
         return (Memory.getOption() & 0x08) == 0x08;
     }
 
@@ -32,7 +32,7 @@ public class Timer
         final int MULTIPLIER = 2;
         int prescalerPower = Memory.getOption() & 0x07;
         int prescaler = (int)Math.pow(2, prescalerPower);
-        if(!getPrescalerAsssignment())
+        if(!getPrescalerAssignment())
         {
             return prescaler * MULTIPLIER;
         }
@@ -50,17 +50,27 @@ public class Timer
         Memory.setTimer(timerRegister);
     }
 
-    public static void increaseTimer()
+    public static void decreasePrescaler()
     {
-        if(!timerEnabled())
-        {
-            return;
+        if(getPrescalerAssignment()) { // Assigned to WatchdogTimer
+            cyclesToTimerIncrease--;
+            if(cyclesToTimerIncrease == 0) {
+                resetTimeToTimerIncrease();
+                Watchdog.decreaseWatchdogTimer();
+            }
+        } else {
+            Watchdog.decreaseWatchdogTimer();
         }
-        cyclesToTimerIncrease--;
-        if(cyclesToTimerIncrease == 0)
-        {
-            resetTimeToTimerIncrease();
-            increaseTimerRegister();
+        if(timerEnabled()) {
+            if(!getPrescalerAssignment()) { // Assigned to timer0
+                cyclesToTimerIncrease--;
+                if(cyclesToTimerIncrease == 0) {
+                    resetTimeToTimerIncrease();
+                    Timer.increaseTimerRegister();
+                }
+            } else {
+                Timer.increaseTimerRegister();
+            }
         }
     }
 }
