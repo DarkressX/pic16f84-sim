@@ -18,10 +18,6 @@ public class Stack
         return stack[stackPointer];
     }
 
-    public static int peek()
-    {
-        return stack[(stackPointer + 7) % 8]; //Get TopOfStack -1 +8 = 7 and modulo 8 to avoid IndexOutOfBound
-    }
 
     private static void pointNext()
     {

@@ -111,7 +111,7 @@ public class Memory
         return 1;
     }
 
-    private static int getFSR()
+    public static int getFSR()
     {
         return memory[0x4];
     }

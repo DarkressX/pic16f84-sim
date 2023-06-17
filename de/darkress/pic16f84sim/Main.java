@@ -1,5 +1,6 @@
 package de.darkress.pic16f84sim;
 
+import de.darkress.pic16f84sim.cli.Cli;
 import de.darkress.pic16f84sim.commands.Command;
 import de.darkress.pic16f84sim.decoder.CommandDecoder;
 import de.darkress.pic16f84sim.microcontroller.Cycles;
@@ -24,20 +25,10 @@ class Main
                 System.out.println("Resetting device");
                 Watchdog.resetProgram();
             }
-            System.out.println("Command: " + program[ProgramCounter.getPc()].toString());
+            String[] instructionName = program[ProgramCounter.getPc()].getClass().toString().split("\\.");
+            System.out.println("Command: " + instructionName[instructionName.length -1]);
             program[ProgramCounter.getPc()].execute();
-
-            System.out.println(Integer.toHexString(Memory.workingRegister) + " " + Cycles.getCycles());
-            System.out.println(Integer.toHexString(Memory.getOption()) + " " + Integer.toHexString(Memory.getTimer()));
-
-            System.out.println(Integer.toHexString(Memory.getRegister(0x20)) + " " + Integer.toHexString(Memory.getRegister(0x21)));
-            System.out.println(Integer.toHexString(Memory.getRegister(0x22)) + " " + Integer.toHexString(Memory.getRegister(0x23)));
-
-            System.out.println(Integer.toHexString(Memory.getPCLATH()) + " " + Integer.toHexString(Memory.getPCL()) + "\n");
-
-            if(ProgramCounter.getPc() == 0x10) {
-                System.out.println(Memory.getRegister(0x20));
-            }
+            Cli.showRegisters();
         }
     }
 }
