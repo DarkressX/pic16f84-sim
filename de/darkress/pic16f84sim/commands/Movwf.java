@@ -18,10 +18,10 @@ public class Movwf extends FileRegisterCommandUtils implements Command
     @Override
     public void execute()
     {
+        ProgramCounter.incPC();
+        Cycles.incCycles();
         int result = Memory.workingRegister;
 
         writeToDestination(destinationBit, address, result);
-        ProgramCounter.incPC();
-        Cycles.addToCycles(1);
     }
 }

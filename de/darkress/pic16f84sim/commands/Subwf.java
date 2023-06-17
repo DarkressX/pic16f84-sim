@@ -38,6 +38,8 @@ public class Subwf extends FileRegisterCommandUtils implements Command
     @Override
     public void execute()
     {
+        ProgramCounter.incPC();
+        Cycles.incCycles();
         int result = Memory.getRegister(address) - Memory.workingRegister + 256;
 
         checkZeroBit(result);
@@ -45,7 +47,5 @@ public class Subwf extends FileRegisterCommandUtils implements Command
         checkDigitCarryBit(Memory.getRegister(address));
 
         writeToDestination(destinationBit, address, result % 256);
-        ProgramCounter.incPC();
-        Cycles.addToCycles(1);
     }
 }

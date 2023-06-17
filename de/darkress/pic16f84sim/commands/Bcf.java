@@ -18,11 +18,11 @@ public class Bcf extends BitOrientedCommandUtils implements Command
     @Override
     public void execute()
     {
+        ProgramCounter.incPC();
+        Cycles.incCycles();
         int result = Memory.getRegister(address);
         result &= ~(1 << bitPlacement); //Mask n-th bit with 0
 
         Memory.setRegister(address, result);
-        ProgramCounter.incPC();
-        Cycles.addToCycles(1);
     }
 }

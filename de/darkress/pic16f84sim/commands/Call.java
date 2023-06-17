@@ -16,8 +16,9 @@ public class Call extends LiteralCommandUtils implements Command
     @Override
     public void execute()
     {
+        Cycles.incCycles();
         Stack.push(ProgramCounter.getPc() + 1);
         ProgramCounter.setPcFrom11BitLiteral(literal);
-        Cycles.addToCycles(2);
+        Cycles.incCycles(); //Simulate nop and 2-Cycle instruction
     }
 }

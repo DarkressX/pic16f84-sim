@@ -9,12 +9,12 @@ public class Clrw extends FileRegisterCommandUtils implements Command
     @Override
     public void execute()
     {
+        ProgramCounter.incPC();
+        Cycles.incCycles();
         final int result = 0;
 
         checkZeroBit(result);
 
         Memory.workingRegister = result;
-        ProgramCounter.incPC();
-        Cycles.addToCycles(1);
     }
 }

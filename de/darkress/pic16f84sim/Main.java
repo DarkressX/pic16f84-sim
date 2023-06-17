@@ -13,17 +13,18 @@ class Main
 {
     public static void main(String[] args) throws InterruptedException {
 
-        Command[] program = Parser.parser("de/darkress/pic16f84sim/TPicSim101.LST");
-        /*for(int i = 0; i < instructions.size(); i++)
-        {
-            program.add(CommandDecoder.decode(instructions.get(i)));
-        }*/
+        Command[] program = Parser.parser("de/darkress/pic16f84sim/TestPrograms/TPicSim7.LST");
+
+        Memory.initMemory();
 
         while(ProgramCounter.getPc() < 1024)
         {
+            System.out.println("Command: " + program[ProgramCounter.getPc()].toString());
             program[ProgramCounter.getPc()].execute();
-            System.out.println(Memory.workingRegister + " " + Cycles.getCycles());
-            System.out.println(Memory.getPCLATH() + " " + Memory.getPCL() + "\n");
+
+            System.out.println(Integer.toHexString(Memory.workingRegister) + " " + Cycles.getCycles());
+            System.out.println(Integer.toHexString(Memory.getOption()) + " " + Integer.toHexString(Memory.getTimer()));
+            System.out.println(Integer.toHexString(Memory.getPCLATH()) + " " + Integer.toHexString(Memory.getPCL()) + "\n");
         }
     }
 }

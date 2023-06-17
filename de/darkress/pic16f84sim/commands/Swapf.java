@@ -18,12 +18,12 @@ public class Swapf extends FileRegisterCommandUtils implements Command
     @Override
     public void execute()
     {
+        ProgramCounter.incPC();
+        Cycles.incCycles();
         int result = (Memory.getRegister(address) <<4) & 0xF0;
         int tmp = Memory.getRegister(address) >>4;
         result += tmp;
 
         writeToDestination(destinationBit, address, result);
-        ProgramCounter.incPC();
-        Cycles.addToCycles(1);
     }
 }

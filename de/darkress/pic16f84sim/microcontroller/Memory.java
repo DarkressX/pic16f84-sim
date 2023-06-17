@@ -4,6 +4,13 @@ import java.util.Arrays;
 
 public class Memory
 {
+    public static void initMemory()
+    {
+        Memory.memory[0x81] = 0xFF; //Option
+        Memory.memory[0x85] = 0x1F; //TrisA
+        Memory.memory[0x86] = 0xFF; //TrisB
+        Memory.setRegister(0x03, 0x18); //Status
+    }
     private static final int MEMORY_SIZE = 0xFF;  //Addressable Memory
     public static int workingRegister = 0;
     private static final int[] memory = new int[MEMORY_SIZE];
@@ -47,12 +54,19 @@ public class Memory
             setDataFromIndirectAddress(indirectAddress, data);
             return;
         }
+        if(address == 0x01) //Reset PrescalerCounter if change on Option or Timer Register
+        {
+            Timer.resetTimeToTimerIncrease();
+            Timer.setCyclesToTimerIncrease(Timer.getCyclesToTimerIncrease() - 1); //Decrease by one to account for
+            // this command execution
+        }
         if((Arrays.stream(bank0UniqueSpecialRegister).anyMatch(x -> x == address)) && getRegisterBank() == 0)
         {
             memory[address] = data;
             return;
         }
-        if((Arrays.stream(bank1UniqueSpecialRegister).anyMatch(x -> x == address)) && getRegisterBank() == 1)
+        if((Arrays.stream(bank0UniqueSpecialRegister).anyMatch(x -> x == address)) && getRegisterBank() == 1) //bank0
+            // because of 7 Bit address
         {
             memory[address + 128] = data;
             return;
@@ -72,6 +86,12 @@ public class Memory
 
     private static void setDataFromIndirectAddress(int address, int data)
     {
+        if(address == 0x81 || address == 0x01) //Reset PrescalerCounter if change on Option or Timer Register
+        {
+            Timer.resetTimeToTimerIncrease();
+            Timer.setCyclesToTimerIncrease(Timer.getCyclesToTimerIncrease() - 1); //Decrease by one to account for
+            // this command execution
+        }
         if((Arrays.stream(bank0UniqueSpecialRegister).anyMatch(x -> x == address)) || (Arrays.stream(bank1UniqueSpecialRegister).anyMatch(x -> x == address)))
         {
             memory[address] = data;
@@ -79,10 +99,6 @@ public class Memory
         }
         memory[address % 128] = data; // else: Registers.Registers which are mapped
         memory[address % 128 + 128] = data; //Ensure data is written to both banks to simulate mapping
-        if(address == 0x2) //Check if PCL is destination
-        {
-            ProgramCounter.loadPc();
-        }
     }
 
     private static int getRegisterBank()
@@ -119,6 +135,21 @@ public class Memory
     {
         memory[0xA] = data & 0x1F;
         memory[0x8A] = data & 0x1F;
+    }
+
+    public static int getOption()
+    {
+        return memory[0x81];
+    }
+
+    public static int getTimer()
+    {
+        return memory[0x01];
+    }
+
+    public static void setTimer(int data)
+    {
+        memory[0x01] = data;
     }
 
     public static boolean getZeroBit()

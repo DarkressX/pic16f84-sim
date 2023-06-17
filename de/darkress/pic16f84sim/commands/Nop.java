@@ -11,6 +11,6 @@ public class Nop extends LiteralCommandUtils implements Command
     {
         // Do nothing, just increment the PC
         ProgramCounter.incPC();
-        Cycles.addToCycles(1);
+        Cycles.incCycles();
     }
 }

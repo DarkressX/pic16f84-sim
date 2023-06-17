@@ -9,7 +9,8 @@ public class Return extends LiteralCommandUtils implements Command
     @Override
     public void execute()
     {
+        Cycles.incCycles();
         ProgramCounter.setPcFromStack(Stack.pop());
-        Cycles.addToCycles(2);
+        Cycles.incCycles(); // Simulate 2-Cycle Instruction
     }
 }

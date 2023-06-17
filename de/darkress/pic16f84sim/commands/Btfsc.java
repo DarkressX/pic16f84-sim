@@ -18,15 +18,14 @@ public class Btfsc extends BitOrientedCommandUtils implements Command
     @Override
     public void execute()
     {
+        ProgramCounter.incPC();
+        Cycles.incCycles();
         int result = Memory.getRegister(address);
 
         if((result & (1 << bitPlacement)) == 0) //Test if bit is clear
         {
-            ProgramCounter.incPC();
-            Cycles.addToCycles(1);
+            Nop nop = new Nop();
+            nop.execute();
         }
-
-        ProgramCounter.incPC();
-        Cycles.addToCycles(1);
     }
 }

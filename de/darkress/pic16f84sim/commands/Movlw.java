@@ -16,8 +16,8 @@ public class Movlw extends LiteralCommandUtils implements Command
     @Override
     public void execute()
     {
-        Memory.workingRegister = literal;
         ProgramCounter.incPC();
-        Cycles.addToCycles(1);
+        Cycles.incCycles();
+        Memory.workingRegister = literal;
     }
 }

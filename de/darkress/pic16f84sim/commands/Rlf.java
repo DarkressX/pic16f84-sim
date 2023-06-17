@@ -18,6 +18,8 @@ public class Rlf extends FileRegisterCommandUtils implements Command
     @Override
     public void execute()
     {
+        ProgramCounter.incPC();
+        Cycles.incCycles();
         int register = Memory.getRegister(address);
         int newCarry = register >>7;
         int oldCarry = Memory.getCarryBit();
@@ -31,7 +33,5 @@ public class Rlf extends FileRegisterCommandUtils implements Command
         }
 
         writeToDestination(destinationBit, address, register);
-        ProgramCounter.incPC();
-        Cycles.addToCycles(1);
     }
 }

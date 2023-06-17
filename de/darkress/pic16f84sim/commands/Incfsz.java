@@ -18,6 +18,8 @@ public class Incfsz extends FileRegisterCommandUtils implements Command
     @Override
     public void execute()
     {
+        ProgramCounter.incPC();
+        Cycles.incCycles();
         int result = Memory.getRegister(address) + 1;
 
         checkZeroBit(result);
@@ -26,10 +28,8 @@ public class Incfsz extends FileRegisterCommandUtils implements Command
 
         if((result % 256) == 0)
         {
-            ProgramCounter.incPC();
-            Cycles.addToCycles(1);
+            Nop nop = new Nop();
+            nop.execute();
         }
-        ProgramCounter.incPC();
-        Cycles.addToCycles(1);
     }
 }

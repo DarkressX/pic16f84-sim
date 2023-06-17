@@ -18,6 +18,8 @@ public class Decfsz extends FileRegisterCommandUtils implements Command
     @Override
     public void execute()
     {
+        ProgramCounter.incPC();
+        Cycles.incCycles();
         int result = Memory.getRegister(address) + 255; // Allow underflow
 
         checkZeroBit(result);
@@ -26,10 +28,8 @@ public class Decfsz extends FileRegisterCommandUtils implements Command
 
         if((result % 256) == 0)
         {
-            ProgramCounter.incPC();
-            Cycles.addToCycles(1);
+            Nop nop = new Nop();
+            nop.execute();
         }
-        ProgramCounter.incPC();
-        Cycles.addToCycles(1);
     }
 }

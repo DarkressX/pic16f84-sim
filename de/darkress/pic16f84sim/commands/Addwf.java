@@ -18,6 +18,8 @@ public class Addwf extends FileRegisterCommandUtils implements Command
     @Override
     public void execute()
     {
+        ProgramCounter.incPC();
+        Cycles.incCycles();
         int result = Memory.getRegister(address) + Memory.workingRegister;
 
         checkZeroBit(result);
@@ -25,7 +27,5 @@ public class Addwf extends FileRegisterCommandUtils implements Command
         checkDigitCarryBit(address);
 
         writeToDestination(destinationBit, address, result);
-        ProgramCounter.incPC();
-        Cycles.addToCycles(1);
     }
 }

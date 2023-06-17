@@ -18,12 +18,12 @@ public class Comf extends FileRegisterCommandUtils implements Command
     @Override
     public void execute()
     {
+        ProgramCounter.incPC();
+        Cycles.incCycles();
         int result = 255 - Memory.getRegister(address); // Get inverse of 8Bit value
 
         checkZeroBit(result);
 
         writeToDestination(destinationBit, address, result);
-        ProgramCounter.incPC();
-        Cycles.addToCycles(1);
     }
 }

@@ -18,12 +18,12 @@ public class Decf extends FileRegisterCommandUtils implements Command
     @Override
     public void execute()
     {
+        ProgramCounter.incPC();
+        Cycles.incCycles();
         int result = Memory.getRegister(address) + 255; // Allow underflow
 
         checkZeroBit(result);
 
         writeToDestination(destinationBit, address, result % 256); // Catch underflow
-        ProgramCounter.incPC();
-        Cycles.addToCycles(1);
     }
 }

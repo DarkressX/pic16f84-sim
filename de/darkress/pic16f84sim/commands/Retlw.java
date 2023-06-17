@@ -17,8 +17,9 @@ public class Retlw extends LiteralCommandUtils implements Command
     @Override
     public void execute()
     {
+        Cycles.incCycles();
         Memory.workingRegister = literal;
         ProgramCounter.setPcFromStack(Stack.pop());
-        Cycles.addToCycles(2);
+        Cycles.incCycles(); // Simulate 2-Cycle Instruction
     }
 }

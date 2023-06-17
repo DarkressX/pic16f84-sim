@@ -36,6 +36,8 @@ public class Sublw extends LiteralCommandUtils implements Command
     @Override
     public void execute()
     {
+        ProgramCounter.incPC();
+        Cycles.incCycles();
         int result = literal - Memory.workingRegister + 256;
 
         checkZeroBit(result);
@@ -43,7 +45,5 @@ public class Sublw extends LiteralCommandUtils implements Command
         checkDigitCarryBit(literal);
 
         Memory.workingRegister = result % 256;
-        ProgramCounter.incPC();
-        Cycles.addToCycles(1);
     }
 }

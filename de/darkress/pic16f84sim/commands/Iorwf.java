@@ -18,12 +18,12 @@ public class Iorwf extends FileRegisterCommandUtils implements Command
     @Override
     public void execute()
     {
+        ProgramCounter.incPC();
+        Cycles.incCycles();
         int result = Memory.getRegister(address) | Memory.workingRegister;
 
         checkZeroBit(result);
 
         writeToDestination(destinationBit, address, result);
-        ProgramCounter.incPC();
-        Cycles.addToCycles(1);
     }
 }

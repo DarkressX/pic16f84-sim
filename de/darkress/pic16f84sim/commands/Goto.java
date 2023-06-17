@@ -15,7 +15,8 @@ public class Goto extends LiteralCommandUtils implements Command
     @Override
     public void execute()
     {
+        Cycles.incCycles();
         ProgramCounter.setPcFrom11BitLiteral(literal);
-        Cycles.addToCycles(2);
+        Cycles.incCycles();
     }
 }
