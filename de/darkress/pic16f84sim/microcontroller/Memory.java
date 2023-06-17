@@ -143,6 +143,13 @@ public class Memory
         return memory[0x81];
     }
 
+    public static int getPortB() {
+        return memory[0x06];
+    }
+
+    public static int getPortA() {
+        return memory[0x05] & 0x1F;
+    }
     public static int getTimer()
     {
         return memory[0x01];

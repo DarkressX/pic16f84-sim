@@ -23,6 +23,9 @@ public class Cli
         printf(Memory.getPCLATH(), "PCLATH", true);
         printf(Memory.getPCL(), "PCL", true);
         System.out.printf("%n");
+        System.out.printf("%s:\t\t%s\t", "PortA", Integer.toBinaryString(Memory.getPortA()));
+        System.out.printf("%s:\t\t%s\t", "PortB", Integer.toBinaryString(Memory.getPortB()));
+        System.out.printf("%n");
     }
 
     private static void printf(int value, String description, boolean hex) {
