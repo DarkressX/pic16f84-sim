@@ -97,7 +97,7 @@ public class CommandDecoder
 
         if (input == 0x0064)
         {
-            //clrwdt();
+            return new Clrwdt();
         }
 
         if (input == 0x0009)

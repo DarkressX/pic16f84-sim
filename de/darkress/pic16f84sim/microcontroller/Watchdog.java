@@ -8,6 +8,10 @@ public class Watchdog
         return watchdogTimer;
     }
 
+    public static void resetWatchdogTimer() {
+        watchdogTimer = 18000;
+    }
+
     public static void decreaseWatchdogTimer()
     {
         watchdogTimer--;
