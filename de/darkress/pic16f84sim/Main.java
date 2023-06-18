@@ -2,18 +2,14 @@ package de.darkress.pic16f84sim;
 
 import de.darkress.pic16f84sim.cli.Cli;
 import de.darkress.pic16f84sim.commands.Command;
-import de.darkress.pic16f84sim.decoder.CommandDecoder;
-import de.darkress.pic16f84sim.microcontroller.Cycles;
 import de.darkress.pic16f84sim.microcontroller.Memory;
 import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
 import de.darkress.pic16f84sim.microcontroller.Watchdog;
 import de.darkress.pic16f84sim.parser.Parser;
 
-import java.util.concurrent.TimeUnit;
-
 class Main
 {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
 
         Command[] program = Parser.parser("de/darkress/pic16f84sim/TestPrograms/TPicSim11.LST");
 
