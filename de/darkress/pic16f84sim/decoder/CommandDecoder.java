@@ -102,7 +102,7 @@ public class CommandDecoder
 
         if (input == 0x0009)
         {
-            //retfie();
+            return new Retfie();
         }
 
         if (input == 0x0008)

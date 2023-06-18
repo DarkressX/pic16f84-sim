@@ -37,8 +37,11 @@ public class ProgramCounter
         Memory.setPCL(pc & 0x00FF);
     }
 
-    public static void resetProgramCounter() {
-        pc = 0;
-        Memory.setPCL(0x0);
+    public static void setProgramCounter(int value) {
+        if(value <= 0xFF && value >= 0)
+        {
+            pc = value;
+            Memory.setPCL(pc);
+        }
     }
 }

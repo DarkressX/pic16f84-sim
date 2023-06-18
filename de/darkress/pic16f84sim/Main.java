@@ -11,7 +11,7 @@ class Main
 {
     public static void main(String[] args) {
 
-        Command[] program = Parser.parser("de/darkress/pic16f84sim/TestPrograms/TPicSim11.LST");
+        Command[] program = Parser.parser("de/darkress/pic16f84sim/TestPrograms/TPicSim8.LST");
 
         Memory.initMemory();
 

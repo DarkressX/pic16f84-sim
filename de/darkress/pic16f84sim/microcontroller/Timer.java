@@ -46,6 +46,12 @@ public class Timer
         if(timerRegister == 0) //check for timer Overflow  --> interrupt
         {
             System.out.println("Timer Overflow");
+            Memory.setRegister(0x0B, Memory.getRegister(0x0B) | 0x04); //set T0IF
+            if(Interrupt.checkTimerInterruptConditions())
+            {
+                Stack.push(ProgramCounter.getPc());
+                ProgramCounter.setProgramCounter(0x04); // Interrupt Vector
+            }
         }
         Memory.setTimer(timerRegister);
     }

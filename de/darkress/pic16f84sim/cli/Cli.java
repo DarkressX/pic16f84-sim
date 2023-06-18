@@ -26,6 +26,8 @@ public class Cli
         System.out.printf("%s:\t\t%s\t", "PortA", Integer.toBinaryString(Memory.getPortA()));
         System.out.printf("%s:\t\t%s\t", "PortB", Integer.toBinaryString(Memory.getPortB()));
         System.out.printf("%n");
+        printf(Memory.getRegister(0x0B), "IntCon", true);
+        System.out.printf("%n");
     }
 
     private static void printf(int value, String description, boolean hex) {

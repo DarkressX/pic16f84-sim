@@ -30,7 +30,7 @@ public class Watchdog
     public static void resetProgram()
     {
         Memory.setRegister(0x03, Memory.getRegister(0x03) | 0x10); //Set !T0 in StatusReg
-        ProgramCounter.resetProgramCounter();
+        ProgramCounter.setProgramCounter(0);
         watchdogTimer = 18000;
     }
 
