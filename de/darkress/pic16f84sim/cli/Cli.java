@@ -1,9 +1,6 @@
 package de.darkress.pic16f84sim.cli;
 
-import de.darkress.pic16f84sim.microcontroller.Cycles;
-import de.darkress.pic16f84sim.microcontroller.Memory;
-import de.darkress.pic16f84sim.microcontroller.Stack;
-import de.darkress.pic16f84sim.microcontroller.Timer;
+import de.darkress.pic16f84sim.microcontroller.*;
 
 public class Cli
 {
@@ -27,6 +24,9 @@ public class Cli
         System.out.printf("%s:\t\t%s\t", "PortB", Integer.toBinaryString(Memory.getPortB()));
         System.out.printf("%n");
         printf(Memory.getRegister(0x0B), "IntCon", true);
+        System.out.printf("%n");
+        printf(ProgramCounter.getPc(), "PC", false);
+        printf(Watchdog.getWatchdogTimer(), "Watchdog", false);
         System.out.printf("%n");
     }
 
