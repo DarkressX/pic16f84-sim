@@ -4,20 +4,20 @@ import java.util.Arrays;
 
 public class Memory
 {
-    public static void initMemory()
+    public Memory()
     {
-        Memory.memory[0x81] = 0xFF; //Option
-        Memory.memory[0x85] = 0x1F; //TrisA
-        Memory.memory[0x86] = 0xFF; //TrisB
-        Memory.setRegister(0x03, 0x18); //Status
+        memory[0x81] = 0xFF; //Option
+        memory[0x85] = 0x1F; //TrisA
+        memory[0x86] = 0xFF; //TrisB
+        setRegister(0x03, 0x18); //Status
     }
-    private static final int MEMORY_SIZE = 0xFF;  //Addressable Memory
-    public static int workingRegister = 0;
-    private static final int[] memory = new int[MEMORY_SIZE];
-    private static final int[] bank0UniqueSpecialRegister = new int[] {0x01,0x05,0x06,0x08,0x09}; //and many more
-    private static final int[] bank1UniqueSpecialRegister = new int[] {0x81,0x85,0x86,0x88,0x89}; //and many more
+    private final int MEMORY_SIZE = 0xFF;  //Addressable Memory
+    public int workingRegister = 0;
+    private final int[] memory = new int[MEMORY_SIZE];
+    private final int[] bank0UniqueSpecialRegister = new int[] {0x01,0x05,0x06,0x08,0x09}; //and many more
+    private final int[] bank1UniqueSpecialRegister = new int[] {0x81,0x85,0x86,0x88,0x89}; //and many more
 
-    public static int getRegister(int address)
+    public int getRegister(int address)
     {
         if(address + 128 > 255) //Guard statement to check for early errors in command de.darkress.pic16f84sim.decoder or implementation
         {
@@ -40,7 +40,7 @@ public class Memory
         return memory[address];
     }
 
-    public static void setRegister(int address, int data)
+    public void setRegister(int address, int data)
     {
         if(address + 128 > 255) //Guard statement to check for early errors in command de.darkress.pic16f84sim.decoder or implementation
         {
@@ -80,12 +80,12 @@ public class Memory
         }
     }
 
-    private static int getDataFromIndirectAddress(int address)
+    private int getDataFromIndirectAddress(int address)
     {
         return memory[address];
     }
 
-    private static void setDataFromIndirectAddress(int address, int data)
+    private void setDataFromIndirectAddress(int address, int data)
     {
         if((address == 0x81 || address == 0x01) && !Timer.getPrescalerAssignment()) //Reset PrescalerCounter if change on Option or Timer Register
         {
@@ -102,7 +102,7 @@ public class Memory
         memory[address % 128 + 128] = data; //Ensure data is written to both banks to simulate mapping
     }
 
-    private static int getRegisterBank()
+    private int getRegisterBank()
     {
         if((memory[0x03] & 0x20) == 0x0)  //Check RP0 Bit of Bank0 Status Register
         {
@@ -111,88 +111,88 @@ public class Memory
         return 1;
     }
 
-    public static int getFSR()
+    public int getFSR()
     {
         return memory[0x4];
     }
 
-    public static int getPCL()
+    public int getPCL()
     {
         return memory[0x2];
     }
 
-    public static void setPCL(int data)
+    public void setPCL(int data)
     {
         memory[0x2] = data;
         memory[0x82] = data;
     }
 
-    public static int getPCLATH()
+    public int getPCLATH()
     {
         return memory[0xA] & 0x1F;
     }
 
-    public static void setPCLATH(int data)
+    public void setPCLATH(int data)
     {
         memory[0xA] = data & 0x1F;
         memory[0x8A] = data & 0x1F;
     }
 
-    public static int getOption()
+    public int getOption()
     {
         return memory[0x81];
     }
 
-    public static int getPortB() {
+    public int getPortB() {
         return memory[0x06];
     }
 
-    public static int getPortA() {
+    public int getPortA() {
         return memory[0x05] & 0x1F;
     }
-    public static int getTimer()
+    public int getTimer()
     {
         return memory[0x01];
     }
 
-    public static void setTimer(int data)
+    public void setTimer(int data)
     {
         memory[0x01] = data;
     }
 
-    public static boolean getZeroBit()
+    public boolean getZeroBit()
     {
         return (memory[0x03] & 0x04) == 0x04;
     }
 
-    public static void setZeroBit()
+    public void setZeroBit()
     {
         memory[0x03] |= 0x04;
         memory[0x83] |= 0x04;
     }
 
-    public static void clearZeroBit()
+    public void clearZeroBit()
     {
         memory[0x03] &= 0xFB;
     }
 
-    public static boolean getDigitCarryBit()
+    public boolean getDigitCarryBit()
     {
         return (memory[0x03] & 0x02) == 0x02;
     }
 
-    public static void setDigitCarryBit()
+    public void setDigitCarryBit()
     {
         memory[0x03] |= 0x02;
         memory[0x83] |= 0x02;
     }
 
-    public static void clearDigitCarryBit()
+    public void clearDigitCarryBit()
     {
         memory[0x03] &= 0xFD;
     }
 
-    public static int getCarryBit()
+    public int getCarryBit()
     {
         if((memory[0x03] & 0x01) == 0x01)
         {
@@ -201,13 +201,13 @@ public class Memory
         else return 0;
     }
 
-    public static void setCarryBit()
+    public void setCarryBit()
     {
         memory[0x03] |= 0x01;
         memory[0x83] |= 0x01;
     }
 
-    public static void clearCarryBit()
+    public void clearCarryBit()
     {
         memory[0x03] &= 0xFE;
     }

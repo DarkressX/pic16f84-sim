@@ -2,6 +2,7 @@ package de.darkress.pic16f84sim.parser;
 
 import de.darkress.pic16f84sim.commands.Command;
 import de.darkress.pic16f84sim.decoder.CommandDecoder;
+import de.darkress.pic16f84sim.microcontroller.Memory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,7 +12,7 @@ import java.util.Scanner;
 
 public class Parser
 {
-    public static Command[] parser(String filePath)
+    public static Command[] parser(String filePath, Memory memory)
     {
         ArrayList<String> instructions = new ArrayList<>();
         try {
@@ -21,8 +22,9 @@ public class Parser
                 String data = scanner.nextLine();
                 if(!data.startsWith(" "))
                 {
-                    String commandAndParametersString = "0x" + data.split(" ")[1];
-                    String instructionAddress = "0x" + data.split(" ")[0];
+                    String[] parametersFromString = data.split(" ");
+                    String commandAndParametersString = "0x" + parametersFromString[1];
+                    String instructionAddress = "0x" + parametersFromString[0];
                     //int commandAndParameters = Integer.decode(commandAndParametersString);
                     //program.add(commandAndParameters);
                     instructions.add(instructionAddress + ", " + commandAndParametersString);
@@ -40,7 +42,7 @@ public class Parser
         {
             int instructionAddress = Integer.decode(instructions.get(i).split(", ")[0]);
             int instruction = Integer.decode(instructions.get(i).split(", ")[1]);
-            program[instructionAddress] = CommandDecoder.decode(instruction);
+            program[instructionAddress] = CommandDecoder.decode(instruction, memory);
         }
 
         return program;
