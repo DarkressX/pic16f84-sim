@@ -9,7 +9,7 @@ public class Addwf extends FileRegisterCommandUtils implements Command
     private final int address;
     private final boolean destinationBit;
 
-    public Addwf(int input)
+    public Addwf(int input, Memory memory)
     {
         address = input & 0x007F;
         destinationBit = checkDestinationBit(input);
