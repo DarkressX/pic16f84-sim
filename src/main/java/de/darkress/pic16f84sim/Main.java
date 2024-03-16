@@ -10,13 +10,12 @@ import de.darkress.pic16f84sim.parser.Parser;
 class Main
 {
     public static void main(String[] args) {
-        Command[] program = Parser.parser("src/main/java/de/darkress/pic16f84sim/TestPrograms/TPicSim1.LST");
-
-        Memory.initMemory();
+        Memory memory = new Memory();
+        Command[] program = Parser.parser("src/main/java/de/darkress/pic16f84sim/TestPrograms/TPicSim1.LST", memory);
 
         while(ProgramCounter.getPc() < 1024)
         {
-            if((Memory.getRegister(0x03) & 0x10) == 0x00) { // Checking WDT in Status Register
+            if((memory.getRegister(0x03) & 0x10) == 0x00) { // Checking WDT in Status Register
                 System.out.println("Resetting device");
                 Watchdog.resetProgram();
             }
