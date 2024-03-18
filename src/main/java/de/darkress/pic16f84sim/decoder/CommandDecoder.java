@@ -12,7 +12,7 @@ public class CommandDecoder
             case 0x700:
                 return new Addwf(input, memory);
             case 0x500:
-                return new Andwf(input);
+                return new Andwf(input, memory);
             case 0x900:
                 return new Comf(input);
         }
@@ -28,11 +28,11 @@ public class CommandDecoder
         switch(input & 0x3C00)
         {
             case 0x1000:
-                return new Bcf(input);
+                return new Bcf(input, memory);
             case 0x1400:
-                return new Bsf(input);
+                return new Bsf(input, memory);
             case 0x1800:
-                return new Btfsc(input);
+                return new Btfsc(input, memory);
             case 0x1C00:
                return new Btfss(input);
         }

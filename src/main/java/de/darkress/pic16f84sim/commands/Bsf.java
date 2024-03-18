@@ -6,13 +6,15 @@ import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
 
 public class Bsf extends BitOrientedCommandUtils implements Command
 {
+    Memory memory;
     private final int address;
     private int bitPlacement;
 
-    public Bsf(int input)
+    public Bsf(int input, Memory memory)
     {
         address = input & 0x007F;
         bitPlacement = checkBitPlacement(input);
+        this.memory = memory;
     }
 
     @Override
@@ -20,9 +22,9 @@ public class Bsf extends BitOrientedCommandUtils implements Command
     {
         ProgramCounter.incPC();
         Cycles.incCycles();
-        int result = Memory.getRegister(address);
+        int result = memory.getRegister(address);
         result |= (1 << bitPlacement);
 
-        Memory.setRegister(address, result);
+        memory.setRegister(address, result);
     }
 }
