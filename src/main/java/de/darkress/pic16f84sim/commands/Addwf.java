@@ -6,6 +6,7 @@ import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
 
 public class Addwf extends FileRegisterCommandUtils implements Command
 {
+    Memory memory;
     private final int address;
     private final boolean destinationBit;
 
@@ -13,6 +14,7 @@ public class Addwf extends FileRegisterCommandUtils implements Command
     {
         address = input & 0x007F;
         destinationBit = checkDestinationBit(input);
+        this.memory = memory;
     }
 
     @Override
@@ -20,7 +22,7 @@ public class Addwf extends FileRegisterCommandUtils implements Command
     {
         ProgramCounter.incPC();
         Cycles.incCycles();
-        int result = Memory.getRegister(address) + Memory.workingRegister;
+        int result = memory.getRegister(address) + memory.workingRegister;
 
         checkZeroBit(result);
         checkCarryBit(result);
