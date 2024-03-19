@@ -6,6 +6,7 @@ import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
 
 public class Clrw extends FileRegisterCommandUtils implements Command
 {
+	Memory memory;
     @Override
     public void execute()
     {
@@ -15,6 +16,6 @@ public class Clrw extends FileRegisterCommandUtils implements Command
 
         checkZeroBit(result);
 
-        Memory.workingRegister = result;
+        memory.workingRegister = result;
     }
 }

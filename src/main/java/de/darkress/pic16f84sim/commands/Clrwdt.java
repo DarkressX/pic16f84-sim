@@ -4,7 +4,7 @@ import de.darkress.pic16f84sim.microcontroller.*;
 
 public class Clrwdt extends LiteralCommandUtils implements Command
 {
-
+	Memory memory;
     public Clrwdt()
     {
     }
@@ -15,7 +15,7 @@ public class Clrwdt extends LiteralCommandUtils implements Command
         ProgramCounter.incPC();
         Cycles.incCycles();
 
-        Memory.setRegister(0x03, Memory.getRegister(0x03) | 0x18);
+        memory.setRegister(0x03, memory.getRegister(0x03) | 0x18);
         if(Timer.getPrescalerAssignment()) {
             Timer.resetTimeToTimerIncrease();
             Watchdog.resetWatchdogTimer();
