@@ -4,15 +4,17 @@ import de.darkress.pic16f84sim.microcontroller.Cycles;
 import de.darkress.pic16f84sim.microcontroller.Memory;
 import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
 
-public class Addlw extends LiteralCommandUtils implements Command
+public class Addlw implements Command
 {
     private final int literal;
     Memory memory;
+    LiteralCommandUtils literalCommandUtils;
 
     public Addlw(int input, Memory memory)
     {
         literal = input & 0x00FF;
         this.memory = memory;
+        literalCommandUtils = new LiteralCommandUtils(memory);
     }
 
     @Override
@@ -22,9 +24,9 @@ public class Addlw extends LiteralCommandUtils implements Command
         Cycles.incCycles();
         int result = literal + memory.workingRegister;
 
-        checkZeroBit(result);
-        checkCarryBit(result);
-        checkDigitCarryBit(literal);
+        literalCommandUtils.checkZeroBit(result);
+        literalCommandUtils.checkCarryBit(result);
+        literalCommandUtils.checkDigitCarryBit(literal);
 
         memory.workingRegister = result % 256;
     }
