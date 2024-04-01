@@ -4,30 +4,36 @@ import de.darkress.pic16f84sim.microcontroller.Memory;
 
 public class LiteralCommandUtils
 {
+    Memory memory;
+
+    public LiteralCommandUtils(Memory memory) {
+        this.memory = memory;
+    }
+
     protected void checkZeroBit(int result)
     {
         if((result % 256) == 0){
-            Memory.setZeroBit();
+            memory.setZeroBit();
         } else{
-            Memory.clearZeroBit();
+            memory.clearZeroBit();
         }
     }
 
     protected void checkCarryBit(int result)
     {
         if(result > 255){
-            Memory.setCarryBit();
+            memory.setCarryBit();
         } else{
-            Memory.clearCarryBit();
+            memory.clearCarryBit();
         }
     }
 
     protected void checkDigitCarryBit(int literal)
     {
-        if(((Memory.workingRegister & 0x0F) + (literal & 0x0F)) > 15){
-            Memory.setDigitCarryBit();
+        if(((memory.workingRegister & 0x0F) + (literal & 0x0F)) > 15){
+            memory.setDigitCarryBit();
         } else{
-            Memory.clearDigitCarryBit();
+            memory.clearDigitCarryBit();
         }
     }
 }
