@@ -2,9 +2,11 @@ package de.darkress.pic16f84sim.microcontroller;
 
 import java.util.Arrays;
 
-public class Memory
+public enum Memory
 {
-    public Memory()
+    Instance;
+
+    Memory()
     {
         memory[0x81] = 0xFF; //Option
         memory[0x85] = 0x1F; //TrisA
