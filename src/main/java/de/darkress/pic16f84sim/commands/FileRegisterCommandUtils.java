@@ -4,31 +4,37 @@ import de.darkress.pic16f84sim.microcontroller.Memory;
 
 public class FileRegisterCommandUtils
 {
+    Memory memory;
+
+    public FileRegisterCommandUtils(Memory memory) {
+        this.memory = memory;
+    }
+
     protected void checkZeroBit(int result)
     {
         if((result % 256) == 0){
-            Memory.setZeroBit();
+            memory.setZeroBit();
         } else{
-            Memory.clearZeroBit();
+            memory.clearZeroBit();
         }
     }
 
     protected void checkCarryBit(int result)
     {
         if(result > 255){
-            Memory.setCarryBit();
+            memory.setCarryBit();
         } else{
-            Memory.clearCarryBit();
+            memory.clearCarryBit();
         }
     }
 
     protected void checkDigitCarryBit(int address)
     {
-        int literal = Memory.getRegister(address);
-        if(((Memory.workingRegister & 0x0F) + (literal & 0x0F)) > 15){
-            Memory.setDigitCarryBit();
+        int literal = memory.getRegister(address);
+        if(((memory.workingRegister & 0x0F) + (literal & 0x0F)) > 15){
+            memory.setDigitCarryBit();
         } else{
-            Memory.clearDigitCarryBit();
+            memory.clearDigitCarryBit();
         }
     }
 
@@ -37,10 +43,10 @@ public class FileRegisterCommandUtils
         if(destinationBit)
         {
             //Store in FileRegister
-            Memory.setRegister(fileAddress, result);
+            memory.setRegister(fileAddress, result);
         } else {
             //Store in WRegister
-            Memory.workingRegister = result;
+            memory.workingRegister = result;
         }
     }
 
