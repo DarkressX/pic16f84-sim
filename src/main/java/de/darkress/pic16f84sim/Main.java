@@ -10,7 +10,7 @@ import de.darkress.pic16f84sim.parser.Parser;
 class Main
 {
     public static void main(String[] args) {
-        Memory memory = new Memory();
+        Memory memory = Memory.Instance;
         Command[] program = Parser.parser("src/main/java/de/darkress/pic16f84sim/TestPrograms/TPicSim1.LST", memory);
 
         while(ProgramCounter.getPc() < 1024)
