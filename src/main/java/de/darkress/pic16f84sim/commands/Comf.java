@@ -4,17 +4,19 @@ import de.darkress.pic16f84sim.microcontroller.Cycles;
 import de.darkress.pic16f84sim.microcontroller.Memory;
 import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
 
-public class Comf extends FileRegisterCommandUtils implements Command
+public class Comf implements Command
 {
 	Memory memory;
+    FileRegisterCommandUtils fileRegisterCommandUtils;
     private final int address;
     private final boolean destinationBit;
 
     public Comf(int input, Memory memory)
     {
-        address = input & 0x007F;
-        destinationBit = checkDestinationBit(input);
         this.memory = memory;
+        this.fileRegisterCommandUtils = new FileRegisterCommandUtils(memory);
+        address = input & 0x007F;
+        destinationBit = fileRegisterCommandUtils.checkDestinationBit(input);
     }
 
     @Override
@@ -24,8 +26,8 @@ public class Comf extends FileRegisterCommandUtils implements Command
         Cycles.incCycles();
         int result = 255 - memory.getRegister(address); // Get inverse of 8Bit value
 
-        checkZeroBit(result);
+        fileRegisterCommandUtils.checkZeroBit(result);
 
-        writeToDestination(destinationBit, address, result);
+        fileRegisterCommandUtils.writeToDestination(destinationBit, address, result);
     }
 }

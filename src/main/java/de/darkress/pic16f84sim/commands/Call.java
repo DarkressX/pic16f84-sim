@@ -4,7 +4,8 @@ import de.darkress.pic16f84sim.microcontroller.Cycles;
 import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
 import de.darkress.pic16f84sim.microcontroller.Stack;
 
-public class Call extends LiteralCommandUtils implements Command
+//Part of LiteralCommandUtils
+public class Call implements Command
 {
     private final int literal;
 
