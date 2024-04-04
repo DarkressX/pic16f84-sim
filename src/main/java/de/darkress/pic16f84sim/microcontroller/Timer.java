@@ -2,6 +2,7 @@ package de.darkress.pic16f84sim.microcontroller;
 
 public class Timer
 {
+    static Memory memory = Memory.Instance;
     public static int getCyclesToTimerIncrease()
     {
         return cyclesToTimerIncrease;
@@ -16,7 +17,7 @@ public class Timer
 
     private static boolean timerEnabled()
     {
-        return (Memory.getOption() & 0x20) != 0x20;
+        return (memory.getOption() & 0x20) != 0x20;
     }
 
     public static void resetTimeToTimerIncrease()
@@ -25,12 +26,12 @@ public class Timer
     }
 
     public static boolean getPrescalerAssignment() {
-        return (Memory.getOption() & 0x08) == 0x08;
+        return (memory.getOption() & 0x08) == 0x08;
     }
 
     private static int getPrescalerFactor() {
         final int MULTIPLIER = 2;
-        int prescalerPower = Memory.getOption() & 0x07;
+        int prescalerPower = memory.getOption() & 0x07;
         int prescaler = (int)Math.pow(2, prescalerPower);
         if(!getPrescalerAssignment())
         {
@@ -41,19 +42,19 @@ public class Timer
 
     private static void increaseTimerRegister()
     {
-        int timerRegister = Memory.getRegister(0x01);
+        int timerRegister = memory.getRegister(0x01);
         timerRegister = (timerRegister + 1) % 256;
         if(timerRegister == 0) //check for timer Overflow  --> interrupt
         {
             System.out.println("Timer Overflow");
-            Memory.setRegister(0x0B, Memory.getRegister(0x0B) | 0x04); //set T0IF
+            memory.setRegister(0x0B, memory.getRegister(0x0B) | 0x04); //set T0IF
             if(Interrupt.checkTimerInterruptConditions())
             {
                 Stack.push(ProgramCounter.getPc());
                 ProgramCounter.setProgramCounter(0x04); // Interrupt Vector
             }
         }
-        Memory.setTimer(timerRegister);
+        memory.setTimer(timerRegister);
     }
 
     public static void decreasePrescaler()

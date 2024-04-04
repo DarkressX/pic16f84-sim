@@ -4,6 +4,7 @@ public class ProgramCounter
 
     //This class is not actual part of the µC. It is a storage for the current value of the PC
 {
+    static Memory memory = Memory.Instance;
     private static int pc = 0;
 
     public static int getPc()
@@ -14,34 +15,34 @@ public class ProgramCounter
     public static void setPcFrom11BitLiteral(int data)
     {
         int pcl = data & 0x00FF;
-        int pch = Memory.getPCLATH();
+        int pch = memory.getPCLATH();
         pch = ((pch & 0xF8) <<8) + (data & 0x700);
-        Memory.setPCL(pcl);
+        memory.setPCL(pcl);
         pc = (pch) + pcl;
     }
 
     public static void setPcFromStack(int stack)
     {
         pc = stack;
-        Memory.setPCL(pc & 0x00FF);
+        memory.setPCL(pc & 0x00FF);
     }
 
     public static void loadPc()
     {
-        pc = (Memory.getPCLATH() <<8) + Memory.getPCL();
+        pc = (memory.getPCLATH() <<8) + memory.getPCL();
     }
 
     public static void incPC() //is called after every instruction execution
     {
         pc++;
-        Memory.setPCL(pc & 0x00FF);
+        memory.setPCL(pc & 0x00FF);
     }
 
     public static void setProgramCounter(int value) {
         if(value <= 0xFF && value >= 0)
         {
             pc = value;
-            Memory.setPCL(pc);
+            memory.setPCL(pc);
         }
     }
 }

@@ -2,6 +2,7 @@ package de.darkress.pic16f84sim.microcontroller;
 
 public class Watchdog
 {
+    static Memory memory = Memory.Instance;
     private static int watchdogTimer = 18000;
     public static int getWatchdogTimer()
     {
@@ -23,13 +24,13 @@ public class Watchdog
         if(watchdogTimer == 0)
         {
             System.out.println("Watchdog Time-Out");
-            Memory.setRegister(0x03, Memory.getRegister(0x03) & 0xEF); //Clear !TO in StatusReg
+            memory.setRegister(0x03, memory.getRegister(0x03) & 0xEF); //Clear !TO in StatusReg
         }
     }
 
     public static void resetProgram()
     {
-        Memory.setRegister(0x03, Memory.getRegister(0x03) | 0x10); //Set !T0 in StatusReg
+        memory.setRegister(0x03, memory.getRegister(0x03) | 0x10); //Set !T0 in StatusReg
         ProgramCounter.setProgramCounter(0);
         watchdogTimer = 18000;
     }
