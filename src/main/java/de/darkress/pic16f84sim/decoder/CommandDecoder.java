@@ -47,6 +47,8 @@ public class CommandDecoder
         {
             case 0x2000:
                 return new Call(input);
+            case 0x2800:
+                return new Goto(input);
         }
 
         if (input == 0x0064)
