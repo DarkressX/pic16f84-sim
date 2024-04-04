@@ -3,7 +3,8 @@ package de.darkress.pic16f84sim.commands;
 import de.darkress.pic16f84sim.microcontroller.Cycles;
 import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
 
-public class Nop extends LiteralCommandUtils implements Command
+//Part of LiteralCommandUtils
+public class Nop implements Command
 {
 
     @Override

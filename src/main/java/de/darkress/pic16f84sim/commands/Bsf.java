@@ -4,17 +4,19 @@ import de.darkress.pic16f84sim.microcontroller.Cycles;
 import de.darkress.pic16f84sim.microcontroller.Memory;
 import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
 
-public class Bsf extends BitOrientedCommandUtils implements Command
+public class Bsf implements Command
 {
     Memory memory;
+    BitOrientedCommandUtils bitOrientedCommandUtils;
     private final int address;
     private int bitPlacement;
 
     public Bsf(int input, Memory memory)
     {
-        address = input & 0x007F;
-        bitPlacement = checkBitPlacement(input);
         this.memory = memory;
+        this.bitOrientedCommandUtils = new BitOrientedCommandUtils(memory);
+        address = input & 0x007F;
+        bitPlacement = bitOrientedCommandUtils.checkBitPlacement(input);
     }
 
     @Override

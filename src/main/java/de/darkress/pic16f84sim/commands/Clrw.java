@@ -4,9 +4,16 @@ import de.darkress.pic16f84sim.microcontroller.Cycles;
 import de.darkress.pic16f84sim.microcontroller.Memory;
 import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
 
-public class Clrw extends FileRegisterCommandUtils implements Command
+public class Clrw implements Command
 {
 	Memory memory;
+    FileRegisterCommandUtils fileRegisterCommandUtils;
+
+    public Clrw(Memory memory) {
+        this.memory = memory;
+        this.fileRegisterCommandUtils = new FileRegisterCommandUtils(memory);
+    }
+
     @Override
     public void execute()
     {
@@ -14,7 +21,7 @@ public class Clrw extends FileRegisterCommandUtils implements Command
         Cycles.incCycles();
         final int result = 0;
 
-        checkZeroBit(result);
+        fileRegisterCommandUtils.checkZeroBit(result);
 
         memory.workingRegister = result;
     }

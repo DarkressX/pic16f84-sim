@@ -2,11 +2,13 @@ package de.darkress.pic16f84sim.commands;
 
 import de.darkress.pic16f84sim.microcontroller.*;
 
-public class Clrwdt extends LiteralCommandUtils implements Command
+//Party of LiteralCommandUtils
+public class Clrwdt implements Command
 {
 	Memory memory;
-    public Clrwdt()
+    public Clrwdt(Memory memory)
     {
+        this.memory = memory;
     }
 
     @Override

@@ -20,9 +20,9 @@ public class CommandDecoder
         switch(input & 0x3F80)
         {
             case 0x180:
-                return new Clrf(input);
+                return new Clrf(input, memory);
             case 0x100:
-                return new Clrw();
+                return new Clrw(memory);
         }
 
         switch(input & 0x3C00)
@@ -51,7 +51,7 @@ public class CommandDecoder
 
         if (input == 0x0064)
         {
-            return new Clrwdt();
+            return new Clrwdt(memory);
         }
 
         if (input == 0x0063)
