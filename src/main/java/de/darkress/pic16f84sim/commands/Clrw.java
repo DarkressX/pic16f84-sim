@@ -23,6 +23,6 @@ public class Clrw implements Command
 
         fileRegisterCommandUtils.checkZeroBit(result);
 
-        memory.workingRegister = result;
+        memory.setWorkingRegister(result);
     }
 }

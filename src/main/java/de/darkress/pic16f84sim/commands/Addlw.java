@@ -22,12 +22,12 @@ public class Addlw implements Command
     {
         ProgramCounter.incPC();
         Cycles.incCycles();
-        int result = literal + memory.workingRegister;
+        int result = literal + memory.getWorkingRegister();
 
         literalCommandUtils.checkZeroBit(result);
         literalCommandUtils.checkCarryBit(result);
         literalCommandUtils.checkDigitCarryBit(literal);
 
-        memory.workingRegister = result % 256;
+        memory.setWorkingRegister(result % 256);
     }
 }

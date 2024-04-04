@@ -30,7 +30,7 @@ public class LiteralCommandUtils
 
     protected void checkDigitCarryBit(int literal)
     {
-        if(((memory.workingRegister & 0x0F) + (literal & 0x0F)) > 15){
+        if(((memory.getWorkingRegister() & 0x0F) + (literal & 0x0F)) > 15){
             memory.setDigitCarryBit();
         } else{
             memory.clearDigitCarryBit();

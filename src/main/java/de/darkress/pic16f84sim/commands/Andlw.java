@@ -21,10 +21,10 @@ public class Andlw implements Command
     {
         ProgramCounter.incPC();
         Cycles.incCycles();
-        int result = literal & memory.workingRegister;
+        int result = literal & memory.getWorkingRegister();
 
         literalCommandUtils.checkZeroBit(result);
 
-        memory.workingRegister = result % 256;
+        memory.setWorkingRegister(result % 256);
     }
 }

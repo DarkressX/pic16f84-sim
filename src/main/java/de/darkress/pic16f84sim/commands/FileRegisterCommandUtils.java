@@ -31,7 +31,7 @@ public class FileRegisterCommandUtils
     protected void checkDigitCarryBit(int address)
     {
         int literal = memory.getRegister(address);
-        if(((memory.workingRegister & 0x0F) + (literal & 0x0F)) > 15){
+        if(((memory.getWorkingRegister() & 0x0F) + (literal & 0x0F)) > 15){
             memory.setDigitCarryBit();
         } else{
             memory.clearDigitCarryBit();
@@ -46,7 +46,7 @@ public class FileRegisterCommandUtils
             memory.setRegister(fileAddress, result);
         } else {
             //Store in WRegister
-            memory.workingRegister = result;
+            memory.setWorkingRegister(result);
         }
     }
 

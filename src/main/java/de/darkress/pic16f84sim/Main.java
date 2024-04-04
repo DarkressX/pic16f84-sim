@@ -3,6 +3,7 @@ package de.darkress.pic16f84sim;
 import de.darkress.pic16f84sim.cli.Cli;
 import de.darkress.pic16f84sim.commands.Command;
 import de.darkress.pic16f84sim.microcontroller.Memory;
+import de.darkress.pic16f84sim.microcontroller.MemoryEnum;
 import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
 import de.darkress.pic16f84sim.microcontroller.Watchdog;
 import de.darkress.pic16f84sim.parser.Parser;
@@ -10,7 +11,7 @@ import de.darkress.pic16f84sim.parser.Parser;
 class Main
 {
     public static void main(String[] args) {
-        Memory memory = Memory.Instance;
+        Memory memory = MemoryEnum.Instance;
         Command[] program = Parser.parser("src/main/java/de/darkress/pic16f84sim/TestPrograms/Addition.LST", memory);
 
         while(ProgramCounter.getPc() < 1024)

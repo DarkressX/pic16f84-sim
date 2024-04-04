@@ -4,7 +4,7 @@ public class ProgramCounter
 
     //This class is not actual part of the µC. It is a storage for the current value of the PC
 {
-    static Memory memory = Memory.Instance;
+    static Memory memory = MemoryEnum.Instance;
     private static int pc = 0;
 
     public static int getPc()

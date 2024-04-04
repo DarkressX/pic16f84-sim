@@ -24,7 +24,7 @@ public class Addwf implements Command
     {
         ProgramCounter.incPC();
         Cycles.incCycles();
-        int result = memory.getRegister(address) + memory.workingRegister;
+        int result = memory.getRegister(address) + memory.getWorkingRegister();
 
         fileRegisterCommandUtils.checkZeroBit(result);
         fileRegisterCommandUtils.checkCarryBit(result);

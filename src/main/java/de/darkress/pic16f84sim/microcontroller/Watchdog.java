@@ -2,7 +2,7 @@ package de.darkress.pic16f84sim.microcontroller;
 
 public class Watchdog
 {
-    static Memory memory = Memory.Instance;
+    static Memory memory = MemoryEnum.Instance;
     private static int watchdogTimer = 18000;
     public static int getWatchdogTimer()
     {

@@ -4,9 +4,9 @@ import de.darkress.pic16f84sim.microcontroller.*;
 
 public class Cli
 {
-    static Memory memory = Memory.Instance;
+    static Memory memory = MemoryEnum.Instance;
     public static void showRegisters() {
-        printf(memory.workingRegister, "W-Reg", true);
+        printf(memory.getWorkingRegister(), "W-Reg", true);
         printf(Cycles.getCycles(), "Cycles", false);
         System.out.printf("%n");
         printf(memory.getRegister(0x03), "Status", true);

@@ -2,7 +2,7 @@ package de.darkress.pic16f84sim.microcontroller;
 
 public class Timer
 {
-    static Memory memory = Memory.Instance;
+    static Memory memory = MemoryEnum.Instance;
     public static int getCyclesToTimerIncrease()
     {
         return cyclesToTimerIncrease;
