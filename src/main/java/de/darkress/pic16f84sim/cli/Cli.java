@@ -4,26 +4,27 @@ import de.darkress.pic16f84sim.microcontroller.*;
 
 public class Cli
 {
+    static Memory memory = Memory.Instance;
     public static void showRegisters() {
-        printf(Memory.workingRegister, "W-Reg", true);
+        printf(memory.workingRegister, "W-Reg", true);
         printf(Cycles.getCycles(), "Cycles", false);
         System.out.printf("%n");
-        printf(Memory.getRegister(0x03), "Status", true);
-        printf(Memory.getOption(), "Option", true);
+        printf(memory.getRegister(0x03), "Status", true);
+        printf(memory.getOption(), "Option", true);
         System.out.printf("%n");
-        printf(Memory.getFSR(), "FSR", true);
+        printf(memory.getFSR(), "FSR", true);
         printf(Stack.getStackPointer(), "Stackpointer", true);
         System.out.printf("%n");
-        printf(Memory.getTimer(), "Timer", true);
+        printf(memory.getTimer(), "Timer", true);
         printf(Timer.getCyclesToTimerIncrease(), "Prescaler", true);
         System.out.printf("%n");
-        printf(Memory.getPCLATH(), "PCLATH", true);
-        printf(Memory.getPCL(), "PCL", true);
+        printf(memory.getPCLATH(), "PCLATH", true);
+        printf(memory.getPCL(), "PCL", true);
         System.out.printf("%n");
-        System.out.printf("%s:\t\t%s\t", "PortA", Integer.toBinaryString(Memory.getPortA()));
-        System.out.printf("%s:\t\t%s\t", "PortB", Integer.toBinaryString(Memory.getPortB()));
+        System.out.printf("%s:\t\t%s\t", "PortA", Integer.toBinaryString(memory.getPortA()));
+        System.out.printf("%s:\t\t%s\t", "PortB", Integer.toBinaryString(memory.getPortB()));
         System.out.printf("%n");
-        printf(Memory.getRegister(0x0B), "IntCon", true);
+        printf(memory.getRegister(0x0B), "IntCon", true);
         System.out.printf("%n");
         printf(ProgramCounter.getPc(), "PC", false);
         printf(Watchdog.getWatchdogTimer(), "Watchdog", false);
