@@ -10,5 +10,6 @@ public class CommandProvider extends ArrayList<Command> {
         this.add(new Goto());
         this.add(new Nop());
         this.add(new Rlf());
+        this.add(new Movwf());
     }
 }

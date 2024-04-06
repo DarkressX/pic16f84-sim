@@ -1,0 +1,26 @@
+                    00001           ;TPicSim1
+                    00002           ;Programm zum Test des 16F84-Simulators.
+                    00003           ;Es werden alle Literal-Befehle gepr?ft
+                    00004           ;(c) St. Lehmann
+                    00005           ;Ersterstellung: 23.03.2016
+                    00006           ;19.05.2020
+                    00007           ;mod. 18.10.2018 Version HSO
+                    00008           ;
+                    00009           list c=132          ;Zeilenl?nge im LST auf 132 Zeichen setzen
+                    00010           
+                    00011           
+                    00012           ;Definition des Prozessors
+                    00013           device 16F84
+                    00014             
+                    00015           ;Festlegen des Codebeginns
+                    00016           org 0
+                    00017  start    
+0000 3E25           00018           addlw 25h
+0001 008C           00019           Movwf 0Ch
+0002 0D0C           00020           Rlf 0Ch
+                    00024             
+                    00025           
+                    00026  ende     
+0003 2803           00027           goto ende           ;Endlosschleife, verhindert Nirwana
+                    00028           
+                    00029             
