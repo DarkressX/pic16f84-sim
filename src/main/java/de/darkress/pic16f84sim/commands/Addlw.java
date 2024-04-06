@@ -6,9 +6,20 @@ import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
 
 public class Addlw implements Command
 {
-    private final int literal;
+    private int literal;
     Memory memory;
     LiteralCommandUtils literalCommandUtils;
+
+    public Addlw() {
+    }
+
+    @Override
+    public Addlw opCodeCheck(int input) {
+        if ((input & 0x3E00) == 0x3E00) {
+            return new Addlw(input, Memory.Instance);
+        }
+        throw new IllegalArgumentException();
+    }
 
     public Addlw(int input, Memory memory)
     {

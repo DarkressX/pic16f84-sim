@@ -1,12 +1,24 @@
 package de.darkress.pic16f84sim.commands;
 
 import de.darkress.pic16f84sim.microcontroller.Cycles;
+import de.darkress.pic16f84sim.microcontroller.Memory;
 import de.darkress.pic16f84sim.microcontroller.ProgramCounter;
 
 //Part of LiteralCommandUtils
 public class Goto implements Command
 {
-    private final int literal;
+    private int literal;
+
+    public Goto() {
+    }
+
+    @Override
+    public Goto opCodeCheck(int input) {
+        if ((input & 0x3800) == 0x2800) {
+            return new Goto(input);
+        }
+        throw new IllegalArgumentException();
+    }
 
     public Goto(int input)
     {

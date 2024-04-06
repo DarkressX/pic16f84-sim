@@ -19,8 +19,6 @@ class Main
                 System.out.println("Resetting device");
                 Watchdog.resetProgram();
             }
-            String[] instructionName = program[ProgramCounter.getPc()].getClass().toString().split("\\.");
-            System.out.println("Command: " + instructionName[instructionName.length -1]);
             program[ProgramCounter.getPc()].execute();
             Cli.showRegisters();
         }

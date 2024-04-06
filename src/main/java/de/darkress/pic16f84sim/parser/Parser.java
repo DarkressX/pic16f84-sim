@@ -1,7 +1,10 @@
 package de.darkress.pic16f84sim.parser;
 
+import de.darkress.pic16f84sim.commands.Addlw;
 import de.darkress.pic16f84sim.commands.Command;
-import de.darkress.pic16f84sim.decoder.CommandDecoder;
+import de.darkress.pic16f84sim.commands.Goto;
+import de.darkress.pic16f84sim.commands.Nop;
+import de.darkress.pic16f84sim.decoder.CommandProvider;
 import de.darkress.pic16f84sim.microcontroller.Memory;
 
 import java.io.File;
@@ -36,13 +39,21 @@ public class Parser
             e.printStackTrace();
         }
 
+        CommandProvider implementedCommands = new CommandProvider();
+
         Command[] program = new Command[1024];
 
         for(int i = 0; i < instructions.size(); i++)
         {
             int instructionAddress = Integer.decode(instructions.get(i).split(", ")[0]);
             int instruction = Integer.decode(instructions.get(i).split(", ")[1]);
-            program[instructionAddress] = CommandDecoder.decode(instruction, memory);
+            for(int k = 0; k < implementedCommands.size(); k++) {
+                try {
+                    program[instructionAddress] = implementedCommands.get(k).opCodeCheck(instruction);
+                    break;
+                } catch (IllegalArgumentException ignored) {
+                }
+            }
         }
 
         return program;
