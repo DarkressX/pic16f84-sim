@@ -19,6 +19,15 @@ public enum Memory
     private final int[] bank0UniqueSpecialRegister = new int[] {0x01,0x05,0x06,0x08,0x09}; //and many more
     private final int[] bank1UniqueSpecialRegister = new int[] {0x81,0x85,0x86,0x88,0x89}; //and many more
 
+    public void resetMemory() {
+        workingRegister = 0;
+        Arrays.fill(memory, 0);
+        memory[0x81] = 0xFF;
+        memory[0x85] = 0x1F;
+        memory[0x86] = 0xFF;
+        setRegister(0x03, 0x18);
+    }
+
     public int getRegister(int address)
     {
         if(address + 128 > 255) //Guard statement to check for early errors in command de.darkress.pic16f84sim.decoder or implementation
