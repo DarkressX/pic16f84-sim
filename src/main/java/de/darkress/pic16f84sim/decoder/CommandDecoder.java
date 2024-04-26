@@ -11,10 +11,6 @@ public class CommandDecoder
         {
             case 0x700:
                 return new Addwf(input, memory);
-            case 0x500:
-                return new Andwf(input, memory);
-            case 0x900:
-                return new Comf(input, memory);
         }
 
         switch(input & 0x3F80)
@@ -25,18 +21,6 @@ public class CommandDecoder
                 return new Clrw(memory);
         }
 
-        switch(input & 0x3C00)
-        {
-            case 0x1000:
-                return new Bcf(input, memory);
-            case 0x1400:
-                return new Bsf(input, memory);
-            case 0x1800:
-                return new Btfsc(input, memory);
-            case 0x1C00:
-               return new Btfss(input, memory);
-        }
-
         switch(input & 0x3E00)
         {
             case 0x3E00:
@@ -45,21 +29,10 @@ public class CommandDecoder
 
         switch(input & 0x3800)
         {
-            case 0x2000:
-                return new Call(input);
             case 0x2800:
                 return new Goto(input);
         }
 
-        if (input == 0x0064)
-        {
-            return new Clrwdt(memory);
-        }
-
-        if (input == 0x0063)
-        {
-            //sleep();
-        }
 
         System.out.println("No command matched");
         return null;
