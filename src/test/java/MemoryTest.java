@@ -49,4 +49,16 @@ public class MemoryTest {
 
         assertEquals(someNumber, result);
     }
+
+    @Test
+    void getRegisterFromBank1Test() {
+        int registerAddress = 12;
+        int someNumber = 1;
+        memory.setRegister(registerAddress, someNumber); //Write to Register in Bank0
+        memory.setRegister(0x3, 0x38); //Select Bank1
+
+        int result = memory.getRegister(registerAddress); //return result of Register in Bank1 which is mapped to Bank0
+
+        assertEquals(someNumber, result);
+    }
 }
