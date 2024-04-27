@@ -61,4 +61,17 @@ public class MemoryTest {
 
         assertEquals(someNumber, result);
     }
+
+    /*
+    *Bugfix "Falsche SpezialRegister Überprüfung"
+    */
+    @Test
+    void getUnmappedRegisterFromBank1Test() {
+        int registerAddress = 0x5;
+        memory.setRegister(0x3, 0x38); //Select Bank1
+
+        int result = memory.getRegister(registerAddress); //return result of Register in Bank1 which is mapped to Bank0
+
+        assertEquals(0x1F, result);
+    }
 }
