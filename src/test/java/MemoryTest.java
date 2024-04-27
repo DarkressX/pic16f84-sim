@@ -38,4 +38,15 @@ public class MemoryTest {
 
         assertEquals(1, result);
     }
+
+    @Test
+    void getRegisterTest() {
+        int registerAddress = 0xC;
+        int someNumber = 1;
+        memory.setRegister(registerAddress, someNumber);
+
+        int result = memory.getRegister(registerAddress);
+
+        assertEquals(someNumber, result);
+    }
 }
