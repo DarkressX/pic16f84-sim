@@ -17,7 +17,7 @@ public class AddlwTest
     }
 
     @Test
-    void addlwTest() {
+    void addlwSimpleAdditionTest() {
         final int literal = 1;
         Addlw addlw = new Addlw(literal, memory);
 
