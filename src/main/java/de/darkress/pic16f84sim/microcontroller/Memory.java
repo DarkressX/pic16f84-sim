@@ -41,7 +41,7 @@ public enum Memory
         }
         if(getRegisterBank() != 0)
         {
-            if((Arrays.stream(bank1UniqueSpecialRegister).anyMatch(x -> x == address))) //Check if register ist mapped
+            if((Arrays.stream(bank0UniqueSpecialRegister).anyMatch(x -> x == address))) //Check if register ist mapped
             {
                 return memory[address + 128]; //Ensure data is read from bank 1
             }
