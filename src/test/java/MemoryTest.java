@@ -25,4 +25,17 @@ public class MemoryTest {
 
         assertEquals(expectedMessage, resultMessage);
     }
+
+    @Test
+    void getRegisterFromIndirectAddressTest() {
+        int fileSelectRegisterAddress = 0x4;
+        int indirectRegisterAddress = 0xC;
+        int someNumber = 1;
+        memory.setRegister(fileSelectRegisterAddress, indirectRegisterAddress);
+        memory.setRegister(indirectRegisterAddress, someNumber);
+
+        int result = memory.getRegister(0);
+
+        assertEquals(1, result);
+    }
 }
