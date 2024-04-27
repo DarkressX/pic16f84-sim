@@ -32,9 +32,7 @@ public enum Memory
     {
         if(address + 128 > 255) //Guard statement to check for early errors in command de.darkress.pic16f84sim.decoder or implementation
         {
-            System.err.println("Guard statement triggered. The address must be 7Bit long and can therefore not exceed" +
-                    " 127");
-            System.exit(1);
+            throw new RuntimeException("Guard statement triggered. The address must be 7Bit long and can therefore not exceed 127");
         }
         if(address == 0x0)
         {
