@@ -1,0 +1,199 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Timer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">de.darkress.pic16f84sim.microcontroller</a>
+</div>
+
+<h1>Coverage Summary for Class: Timer (de.darkress.pic16f84sim.microcontroller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Timer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/36)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package de.darkress.pic16f84sim.microcontroller;
+&nbsp;
+<b class="nc">&nbsp;public class Timer</b>
+&nbsp;{
+<b class="nc">&nbsp;    static Memory memory = Memory.Instance;</b>
+&nbsp;    public static int getCyclesToTimerIncrease()
+&nbsp;    {
+<b class="nc">&nbsp;        return cyclesToTimerIncrease;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void setCyclesToTimerIncrease(int cyclesToTimerIncrease)
+&nbsp;    {
+<b class="nc">&nbsp;        Timer.cyclesToTimerIncrease = cyclesToTimerIncrease;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    private static int cyclesToTimerIncrease = 1;</b>
+&nbsp;
+&nbsp;    private static boolean timerEnabled()
+&nbsp;    {
+<b class="nc">&nbsp;        return (memory.getOption() &amp; 0x20) != 0x20;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void resetTimeToTimerIncrease()
+&nbsp;    {
+<b class="nc">&nbsp;        cyclesToTimerIncrease = getPrescalerFactor();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean getPrescalerAssignment() {
+<b class="nc">&nbsp;        return (memory.getOption() &amp; 0x08) == 0x08;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int getPrescalerFactor() {
+<b class="nc">&nbsp;        final int MULTIPLIER = 2;</b>
+<b class="nc">&nbsp;        int prescalerPower = memory.getOption() &amp; 0x07;</b>
+<b class="nc">&nbsp;        int prescaler = (int)Math.pow(2, prescalerPower);</b>
+<b class="nc">&nbsp;        if(!getPrescalerAssignment())</b>
+&nbsp;        {
+<b class="nc">&nbsp;            return prescaler * MULTIPLIER;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return prescaler;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void increaseTimerRegister()
+&nbsp;    {
+<b class="nc">&nbsp;        int timerRegister = memory.getRegister(0x01);</b>
+<b class="nc">&nbsp;        timerRegister = (timerRegister + 1) % 256;</b>
+<b class="nc">&nbsp;        if(timerRegister == 0) //check for timer Overflow  --&gt; interrupt</b>
+&nbsp;        {
+<b class="nc">&nbsp;            System.out.println(&quot;Timer Overflow&quot;);</b>
+<b class="nc">&nbsp;            memory.setRegister(0x0B, memory.getRegister(0x0B) | 0x04); //set T0IF</b>
+<b class="nc">&nbsp;            if(Interrupt.checkTimerInterruptConditions())</b>
+&nbsp;            {
+<b class="nc">&nbsp;                Stack.push(ProgramCounter.getPc());</b>
+<b class="nc">&nbsp;                ProgramCounter.setProgramCounter(0x04); // Interrupt Vector</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        memory.setTimer(timerRegister);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void decreasePrescaler()
+&nbsp;    {
+<b class="nc">&nbsp;        if(getPrescalerAssignment()) { // Assigned to WatchdogTimer</b>
+<b class="nc">&nbsp;            cyclesToTimerIncrease--;</b>
+<b class="nc">&nbsp;            if(cyclesToTimerIncrease == 0) {</b>
+<b class="nc">&nbsp;                resetTimeToTimerIncrease();</b>
+<b class="nc">&nbsp;                Watchdog.decreaseWatchdogTimer();</b>
+&nbsp;            }
+&nbsp;        } else {
+<b class="nc">&nbsp;            Watchdog.decreaseWatchdogTimer();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if(timerEnabled()) {</b>
+<b class="nc">&nbsp;            if(!getPrescalerAssignment()) { // Assigned to timer0</b>
+<b class="nc">&nbsp;                cyclesToTimerIncrease--;</b>
+<b class="nc">&nbsp;                if(cyclesToTimerIncrease == 0) {</b>
+<b class="nc">&nbsp;                    resetTimeToTimerIncrease();</b>
+<b class="nc">&nbsp;                    Timer.increaseTimerRegister();</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="nc">&nbsp;                Timer.increaseTimerRegister();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-27 17:35</div>
+</div>
+</body>
+</html>

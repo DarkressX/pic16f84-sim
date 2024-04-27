@@ -1,0 +1,173 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FileRegisterCommandUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">de.darkress.pic16f84sim.commands</a>
+</div>
+
+<h1>Coverage Summary for Class: FileRegisterCommandUtils (de.darkress.pic16f84sim.commands)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FileRegisterCommandUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package de.darkress.pic16f84sim.commands;
+&nbsp;
+&nbsp;import de.darkress.pic16f84sim.microcontroller.Memory;
+&nbsp;
+&nbsp;public class FileRegisterCommandUtils
+&nbsp;{
+&nbsp;    Memory memory;
+&nbsp;
+<b class="nc">&nbsp;    public FileRegisterCommandUtils(Memory memory) {</b>
+<b class="nc">&nbsp;        this.memory = memory;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void checkZeroBit(int result)
+&nbsp;    {
+<b class="nc">&nbsp;        if((result % 256) == 0){</b>
+<b class="nc">&nbsp;            memory.setZeroBit();</b>
+&nbsp;        } else{
+<b class="nc">&nbsp;            memory.clearZeroBit();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void checkCarryBit(int result)
+&nbsp;    {
+<b class="nc">&nbsp;        if(result &gt; 255){</b>
+<b class="nc">&nbsp;            memory.setCarryBit();</b>
+&nbsp;        } else{
+<b class="nc">&nbsp;            memory.clearCarryBit();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void checkDigitCarryBit(int address)
+&nbsp;    {
+<b class="nc">&nbsp;        int literal = memory.getRegister(address);</b>
+<b class="nc">&nbsp;        if(((memory.workingRegister &amp; 0x0F) + (literal &amp; 0x0F)) &gt; 15){</b>
+<b class="nc">&nbsp;            memory.setDigitCarryBit();</b>
+&nbsp;        } else{
+<b class="nc">&nbsp;            memory.clearDigitCarryBit();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void writeToDestination(boolean destinationBit, int fileAddress, int result)
+&nbsp;    {
+<b class="nc">&nbsp;        if(destinationBit)</b>
+&nbsp;        {
+&nbsp;            //Store in FileRegister
+<b class="nc">&nbsp;            memory.setRegister(fileAddress, result);</b>
+&nbsp;        } else {
+&nbsp;            //Store in WRegister
+<b class="nc">&nbsp;            memory.workingRegister = result;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected boolean checkDestinationBit(int input)
+&nbsp;    {
+<b class="nc">&nbsp;        return (input &amp; 0x0080) == 0x0080;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-27 17:35</div>
+</div>
+</body>
+</html>

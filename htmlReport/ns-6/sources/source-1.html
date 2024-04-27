@@ -1,0 +1,166 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Parser</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">de.darkress.pic16f84sim.parser</a>
+</div>
+
+<h1>Coverage Summary for Class: Parser (de.darkress.pic16f84sim.parser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Parser</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package de.darkress.pic16f84sim.parser;
+&nbsp;
+&nbsp;import de.darkress.pic16f84sim.commands.Command;
+&nbsp;import de.darkress.pic16f84sim.decoder.CommandDecoder;
+&nbsp;import de.darkress.pic16f84sim.microcontroller.Memory;
+&nbsp;
+&nbsp;import java.io.File;
+&nbsp;import java.io.FileNotFoundException;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Scanner;
+&nbsp;
+<b class="nc">&nbsp;public class Parser</b>
+&nbsp;{
+&nbsp;    public static Command[] parser(String filePath, Memory memory)
+&nbsp;    {
+<b class="nc">&nbsp;        ArrayList&lt;String&gt; instructions = new ArrayList&lt;&gt;();</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            File file = new File(filePath);</b>
+<b class="nc">&nbsp;            Scanner scanner = new Scanner(file);</b>
+<b class="nc">&nbsp;            while (scanner.hasNextLine()) {</b>
+<b class="nc">&nbsp;                String data = scanner.nextLine();</b>
+<b class="nc">&nbsp;                if(!data.startsWith(&quot; &quot;))</b>
+&nbsp;                {
+<b class="nc">&nbsp;                    String[] parametersFromString = data.split(&quot; &quot;);</b>
+<b class="nc">&nbsp;                    String commandAndParametersString = &quot;0x&quot; + parametersFromString[1];</b>
+<b class="nc">&nbsp;                    String instructionAddress = &quot;0x&quot; + parametersFromString[0];</b>
+&nbsp;                    //int commandAndParameters = Integer.decode(commandAndParametersString);
+&nbsp;                    //program.add(commandAndParameters);
+<b class="nc">&nbsp;                    instructions.add(instructionAddress + &quot;, &quot; + commandAndParametersString);</b>
+&nbsp;                }
+&nbsp;            }
+<b class="nc">&nbsp;            scanner.close();</b>
+<b class="nc">&nbsp;        } catch (FileNotFoundException e) {</b>
+<b class="nc">&nbsp;            System.out.println(&quot;An error occurred.&quot;);</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Command[] program = new Command[1024];</b>
+&nbsp;
+<b class="nc">&nbsp;        for(int i = 0; i &lt; instructions.size(); i++)</b>
+&nbsp;        {
+<b class="nc">&nbsp;            int instructionAddress = Integer.decode(instructions.get(i).split(&quot;, &quot;)[0]);</b>
+<b class="nc">&nbsp;            int instruction = Integer.decode(instructions.get(i).split(&quot;, &quot;)[1]);</b>
+<b class="nc">&nbsp;            program[instructionAddress] = CommandDecoder.decode(instruction, memory);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return program;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-27 17:35</div>
+</div>
+</body>
+</html>
